@@ -1,0 +1,27 @@
+{
+  "name": "coconutfrontend",
+  "version": "0.0.1-SNAPSHOT",
+  "description": "Frontend for COCONUT database",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:justinsane1337/COCONUTfrontend.git"
+  },
+  "keywords": [],
+  "author": "Peter Merseburger",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.9",
+    "react-dom": "^16.9"
+  },
+  "scripts": {
+    "watch": "webpack --watch -d"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5",
+    "@babel/preset-env": "^7.5",
+    "@babel/preset-react": "^7.0",
+    "babel-loader": "^8.0",
+    "webpack": "^4.39",
+    "webpack-cli": "^3.3"
+  }
+}

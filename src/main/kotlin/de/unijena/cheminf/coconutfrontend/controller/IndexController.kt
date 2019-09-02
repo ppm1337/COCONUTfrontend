@@ -1,4 +1,4 @@
-package de.unijena.cheminf.coconutfrontend
+package de.unijena.cheminf.coconutfrontend.controller
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
@@ -10,4 +10,5 @@ class IndexController {
     fun index(): String {
         return "index"
     }
+
 }
