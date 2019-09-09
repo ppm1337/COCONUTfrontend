@@ -1,50 +1,40 @@
 import Container from "react-bootstrap/Container"
 import Table from "react-bootstrap/Table"
 import NaturalProductTableItem from "./NaturalProductTableItem";
+import BrowserFilter from "./BrowserFilter";
+import Row from "react-bootstrap/Row";
+import Nav from "react-bootstrap/Nav";
+import TableBrowser from "./TableBrowser";
+import CardBrowser from "./CardBrowser";
+import NaturalProductCardItem from "./NaturalProductCardItem";
 
-// React
 const React = require("react");
-const ReactDOM = require("react-dom");
-// Rest
-const restClient = require("./restClient");
 
 
 class Browser extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {naturalProducts: []};
-    }
-
-    componentDidMount() {
-        restClient({method: "GET", path: "/api/search"}).then(response => {
-            console.log(response);
-            this.setState({naturalProducts: response.entity._embedded.uniqueNaturalProducts});
-        });
-
-    }
-
     render() {
-        const naturalProducts = this.state.naturalProducts.map(naturalProduct =>
-            <NaturalProductTableItem key={naturalProduct._links.self.href} naturalProduct={naturalProduct}/>
-        );
         return <Container>
-            <Table responsive bordered hover size="sm">
-                <thead>
-                    <tr>
-                        <th>Molecule</th>
-                        <th>Name</th>
-                        <th>NPlikeness Score</th>
-                        <th>Formula</th>
-                        <th>Smiles</th>
-                        <th>Inchi</th>
-                        <th>Inchikey</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {naturalProducts}
-                </tbody>
-            </Table>
-        </Container>
+            <Row>
+                <h2>Component Browser</h2>
+            </Row>
+            <Row>
+                <Nav variant="pills" defaultActiveKey="/browser">
+                    <Nav.Item>
+                        <Nav.Link href="/browser">Table</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="browser/cards">Cards</Nav.Link>
+                    </Nav.Item>
+                </Nav>
+            </Row>
+            <Row>
+                <BrowserFilter/>
+            </Row>
+            <hr/>
+            <Row>
+                <CardBrowser/>
+            </Row>
+        </Container>;
     }
 }
 

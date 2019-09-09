@@ -12,7 +12,6 @@ class NaturalProductTableItem extends React.Component {
             <td>not implemented yet</td>
             <td>{this.props.naturalProduct.npl_score}</td>
             <td>{this.props.naturalProduct.molecular_formula}</td>
-            <td>{this.props.naturalProduct.smiles}</td>
             <td>{this.props.naturalProduct.inchi}</td>
             <td>{this.props.naturalProduct.inchikey}</td>
         </tr>
