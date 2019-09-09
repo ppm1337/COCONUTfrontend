@@ -3,7 +3,8 @@ import BrowserFilter from "./BrowserFilter"
 import Header from "./Header"
 import Introduction from "./Introduction"
 
-import css from "../resources/css/coconut.css"
+import "../resources/css/coconut.css"
+import "bootstrap/dist/css/bootstrap.css";
 
 const React = require("react");
 const ReactDOM = require("react-dom");
