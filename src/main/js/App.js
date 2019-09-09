@@ -1,5 +1,4 @@
 import Browser from "./Browser"
-import BrowserFilter from "./BrowserFilter"
 import Header from "./Header"
 import Introduction from "./Introduction"
 
@@ -13,10 +12,11 @@ const ReactDOM = require("react-dom");
 class App extends React.Component {
 	render() {
 		return <React.Fragment>
-			<Header />
-			<Introduction />
-			<BrowserFilter />
-			<Browser />
+            <Header />
+            <div id="content">
+                <Introduction />
+                <Browser />
+            </div>
 		</React.Fragment>
 	}
 }
