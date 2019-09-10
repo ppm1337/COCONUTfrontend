@@ -24,13 +24,13 @@ class Browser extends React.Component {
                     <Nav.Item>
                         <Nav.Link href="/browser">
                             <FontAwesomeIcon icon="table" fixedWidth/>
-                            Table
+                            &nbsp;Table
                         </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link eventKey="browser/cards">
                             <FontAwesomeIcon icon="clipboard-list" fixedWidth/>
-                            Cards
+                            &nbsp;Cards
                         </Nav.Link>
                     </Nav.Item>
                 </Nav>

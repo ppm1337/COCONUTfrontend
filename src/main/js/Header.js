@@ -7,6 +7,10 @@ import Nav from 'react-bootstrap/Nav'
 import Image from 'react-bootstrap/Image'
 import Figure from 'react-bootstrap/Figure'
 import InputGroup from "react-bootstrap/InputGroup";
+import NavItem from "react-bootstrap/NavItem";
+import Dropdown from "react-bootstrap/Dropdown";
+import NavLink from "react-bootstrap/NavLink";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const React = require("react");
 
@@ -30,7 +34,7 @@ class Header extends React.Component {
                                 <InputGroup size="md">
                                     <Form.Control id="searchInput" type="text" placeholder="Smiles, Inchi, Inchikey"/>
                                     <InputGroup.Append>
-                                        <Button id="searchButton" variant="primary" type="submit">Search</Button>
+                                        <Button id="searchButton" variant="primary" type="submit"><FontAwesomeIcon icon="search" fixedWidth/>&nbsp;Search</Button>
                                     </InputGroup.Append>
                                 </InputGroup>
                                 {/*<div className="form-inline lg">
@@ -49,12 +53,20 @@ class Header extends React.Component {
                         <Row id="headerNav">
                             <Col>
                                 <Nav variant="tabs" defaultActiveKey="/">
-                                    <Nav.Item>
-                                        <Nav.Link href="/">Browser</Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item>
-                                        <Nav.Link href="/search">Search</Nav.Link>
-                                    </Nav.Item>
+                                    <Dropdown as={NavItem}>
+                                        <Dropdown.Toggle as={NavLink}>Browser</Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item href="/browser"><FontAwesomeIcon icon="table" fixedWidth/>&nbsp;Table Browser</Dropdown.Item>
+                                            <Dropdown.Item><FontAwesomeIcon icon="clipboard-list" fixedWidth/>&nbsp;Card Browser</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                    <Dropdown as={NavItem}>
+                                        <Dropdown.Toggle as={NavLink}>Search</Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item href="/search"><FontAwesomeIcon icon="search-plus" fixedWidth/>&nbsp;Advanced Search</Dropdown.Item>
+                                            <Dropdown.Item><FontAwesomeIcon icon="atom" fixedWidth/>&nbsp;Structure Search</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
                                     <Nav.Item>
                                         <Nav.Link href="/download">Download</Nav.Link>
                                     </Nav.Item>
