@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 const React = require("react");
 const restClient = require("./restClient");
 
+
 class CardBrowser extends React.Component {
     constructor(props) {
         super(props);
@@ -21,6 +22,7 @@ class CardBrowser extends React.Component {
 
     render() {
         const cardRowSize = 4;
+        let emptyCardKey = 0;
         let naturalProducts = this.state.naturalProducts;
         let cardRows = [];
 
@@ -33,7 +35,7 @@ class CardBrowser extends React.Component {
             });
 
             while (cardRow.length < cardRowSize) {
-                cardRow.push(<Card style={{visibility: "hidden"}}><Card.Body>""</Card.Body></Card>);
+                cardRow.push(<Card key={emptyCardKey++} style={{visibility: "hidden"}}><Card.Body>""</Card.Body></Card>);
             }
 
             cardRows.push(<CardDeck key={cardRows.length}>
