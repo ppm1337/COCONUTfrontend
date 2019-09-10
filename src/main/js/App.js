@@ -5,6 +5,10 @@ import Introduction from "./Introduction"
 import "../resources/css/coconut.css"
 import "bootstrap/dist/css/bootstrap.css";
 
+import { library } from "@fortawesome/fontawesome-svg-core"
+import { fas } from "@fortawesome/free-solid-svg-icons"
+library.add(fas);
+
 const React = require("react");
 const ReactDOM = require("react-dom");
 
@@ -15,6 +19,7 @@ class App extends React.Component {
             <Header />
             <div id="content">
                 <Introduction />
+                <br/>
                 <Browser />
             </div>
 		</React.Fragment>
