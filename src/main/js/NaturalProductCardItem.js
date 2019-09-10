@@ -1,5 +1,7 @@
 import Card from "react-bootstrap/Card";
+import Table from "react-bootstrap/Table";
 
+const OpenChemLib = require("openchemlib/full");
 const React = require("react");
 
 class NaturalProductCardItem extends React.Component {
@@ -8,16 +10,38 @@ class NaturalProductCardItem extends React.Component {
     }
 
     render() {
+        let canvas = document.createElement("canvas");
+        canvas.width = 400;
+        canvas.height = 300;
+
+        const npMolecule = OpenChemLib.Molecule.fromSmiles(this.props.naturalProduct.smiles);
+
+        OpenChemLib.StructureView.drawMolecule(canvas, npMolecule);
+
         return <Card>
-            <Card.Img variant="top" src="" alt="Component Structure<br> 🥥"/>
+            <Card.Img variant="top" src={canvas.toDataURL()} alt="🥥"/>
             <Card.Body>
                 <Card.Title>
-                    <Card.Link href="">Name goes here</Card.Link>
+                    <Card.Link href=""><small>{this.props.naturalProduct.inchikey}</small></Card.Link>
                 </Card.Title>
-                <Card.Subtitle>{this.props.naturalProduct.inchikey}</Card.Subtitle>
+                <Card.Subtitle>name goes here</Card.Subtitle>
                 <Card.Text>
-                    <li>{this.props.naturalProduct.npl_score}</li>
-                    <li>{this.props.naturalProduct.molecular_formula}</li>
+                    <Table>
+                        <tbody>
+                        <tr>
+                            <td>Mol. Formula</td>
+                            <td>{this.props.naturalProduct.molecular_formula}</td>
+                        </tr>
+                        <tr>
+                            <td>Mol. Weight</td>
+                            <td>{this.props.naturalProduct.molecular_weight}</td>
+                        </tr>
+                        <tr>
+                            <td>NPL Score</td>
+                            <td>{this.props.naturalProduct.npl_score}</td>
+                        </tr>
+                        </tbody>
+                    </Table>
                 </Card.Text>
             </Card.Body>
         </Card>
