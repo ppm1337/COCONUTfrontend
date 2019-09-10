@@ -44,7 +44,9 @@ h {
     margin: 2rem;
 }
 
-.card-img {
-    min-height: 100px;
-    fill: dimgrey;
+.card table tr td {
+    font-size: small;
+    border: none;
+    padding: 0.15rem;
+    margin-bottom: 0;
 }
