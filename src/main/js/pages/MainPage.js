@@ -8,6 +8,7 @@ library.add(fas);
 
 import Header from "../components/Header"
 import Index from "../components/Index";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const React = require("react");
 const ReactDOM = require("react-dom");
@@ -15,10 +16,12 @@ const ReactDOM = require("react-dom");
 
 class MainPage extends React.Component {
 	render() {
-		return <React.Fragment>
-                <Header />
-                <Index />
-            </React.Fragment>
+		return <Router>
+			<React.Fragment>
+				<Header />
+				<Index />
+			</React.Fragment>
+		</Router>
 	}
 }
 

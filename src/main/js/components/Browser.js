@@ -7,7 +7,9 @@ import Nav from "react-bootstrap/Nav";
 import TableBrowser from "./TableBrowser";
 import CardBrowser from "./CardBrowser";
 import NaturalProductCardItem from "./NaturalProductCardItem";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Route, Switch } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 
 const React = require("react");
 
@@ -26,24 +28,32 @@ class Browser extends React.Component {
             <Row>
                 <Nav variant="pills" defaultActiveKey="/browser/cards">
                     <Nav.Item>
-                        <Nav.Link href="/browser">
-                            <FontAwesomeIcon icon="table" fixedWidth/>
-                            &nbsp;Table
-                        </Nav.Link>
+                        <LinkContainer to="/browser/cards">
+                            <Nav.Link>
+                                <FontAwesomeIcon icon="clipboard-list" fixedWidth/>
+                                &nbsp;Cards
+                            </Nav.Link>
+                        </LinkContainer>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="/browser/cards">
-                            <FontAwesomeIcon icon="clipboard-list" fixedWidth/>
-                            &nbsp;Cards
-                        </Nav.Link>
+                        <LinkContainer to="/browser/table">
+                            <Nav.Link>
+                                <FontAwesomeIcon icon="table" fixedWidth/>
+                                &nbsp;Table
+                            </Nav.Link>
+                        </LinkContainer>
                     </Nav.Item>
                 </Nav>
             </Row>
             <br/>
             <Row>
                 <CardBrowser/>
+                <Switch>
+                    <Route exact path="/browser/cards" component={CardBrowser}/>
+                    <Route exact path="/browser/table" component={TableBrowser}/>
+                </Switch>
             </Row>
-        </Container>;
+        </Container>
     }
 }
 
