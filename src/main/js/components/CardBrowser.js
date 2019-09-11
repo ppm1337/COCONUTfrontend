@@ -15,7 +15,6 @@ class CardBrowser extends React.Component {
 
     componentDidMount() {
         restClient({method: "GET", path: "/api/search"}).then(response => {
-            console.log(response);
             this.setState({naturalProducts: response.entity._embedded.uniqueNaturalProducts});
         });
     }
@@ -36,7 +35,7 @@ class CardBrowser extends React.Component {
 
             while (cardRow.length < cardRowSize) {
                 cardRow.push(<Card key={emptyCardKey++} style={{visibility: "hidden"}}>
-                    <Card.Body>""</Card.Body>
+                    <Card.Body><Card.Text>empty</Card.Text></Card.Body>
                 </Card>);
             }
 

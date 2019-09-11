@@ -25,24 +25,22 @@ class NaturalProductCardItem extends React.Component {
                     <Card.Link href=""><small>{this.props.naturalProduct.inchikey}</small></Card.Link>
                 </Card.Title>
                 <Card.Subtitle>name goes here</Card.Subtitle>
-                <Card.Text>
-                    <Table>
-                        <tbody>
-                        <tr>
-                            <td>Mol. Formula</td>
-                            <td>{this.props.naturalProduct.molecular_formula}</td>
-                        </tr>
-                        <tr>
-                            <td>Mol. Weight</td>
-                            <td>{this.props.naturalProduct.molecular_weight}</td>
-                        </tr>
-                        <tr>
-                            <td>NPL Score</td>
-                            <td>{this.props.naturalProduct.npl_score}</td>
-                        </tr>
-                        </tbody>
-                    </Table>
-                </Card.Text>
+                <Table>
+                    <tbody>
+                    <tr>
+                        <td>Mol. Formula</td>
+                        <td>{this.props.naturalProduct.molecular_formula}</td>
+                    </tr>
+                    <tr>
+                        <td>Mol. Weight</td>
+                        <td>{this.props.naturalProduct.molecular_weight}</td>
+                    </tr>
+                    <tr>
+                        <td>NPL Score</td>
+                        <td>{this.props.naturalProduct.npl_score}</td>
+                    </tr>
+                    </tbody>
+                </Table>
             </Card.Body>
         </Card>
     }
