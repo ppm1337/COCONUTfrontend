@@ -20,7 +20,11 @@ class Browser extends React.Component {
             </Row>
             <br/>
             <Row>
-                <Nav variant="pills" defaultActiveKey="/browser">
+                <BrowserFilter/>
+            </Row>
+            <br/>
+            <Row>
+                <Nav variant="pills" defaultActiveKey="/browser/cards">
                     <Nav.Item>
                         <Nav.Link href="/browser">
                             <FontAwesomeIcon icon="table" fixedWidth/>
@@ -28,16 +32,12 @@ class Browser extends React.Component {
                         </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="browser/cards">
+                        <Nav.Link eventKey="/browser/cards">
                             <FontAwesomeIcon icon="clipboard-list" fixedWidth/>
                             &nbsp;Cards
                         </Nav.Link>
                     </Nav.Item>
                 </Nav>
-            </Row>
-            <br/>
-            <Row>
-                <BrowserFilter/>
             </Row>
             <br/>
             <Row>

@@ -35,7 +35,9 @@ class CardBrowser extends React.Component {
             });
 
             while (cardRow.length < cardRowSize) {
-                cardRow.push(<Card key={emptyCardKey++} style={{visibility: "hidden"}}><Card.Body>""</Card.Body></Card>);
+                cardRow.push(<Card key={emptyCardKey++} style={{visibility: "hidden"}}>
+                    <Card.Body>""</Card.Body>
+                </Card>);
             }
 
             cardRows.push(<CardDeck key={cardRows.length}>

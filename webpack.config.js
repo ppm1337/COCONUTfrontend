@@ -1,11 +1,14 @@
 module.exports = {
-    entry: "./src/main/js/App.js",
+    entry: {
+        index: "./src/main/js/pages/MainPage.js",
+        compound: "./src/main/js/pages/CompoundPage.js"
+    },
     devtool: "sourcemaps",
     cache: true,
     mode: "development",
     output: {
         path: __dirname,
-        filename: "./src/main/resources/static/built/bundle.js"
+        filename: "./src/main/resources/static/built/[name].js"
     },
     module: {
         rules: [

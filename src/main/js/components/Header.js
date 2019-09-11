@@ -9,8 +9,8 @@ import Figure from 'react-bootstrap/Figure'
 import InputGroup from "react-bootstrap/InputGroup";
 import NavItem from "react-bootstrap/NavItem";
 import Dropdown from "react-bootstrap/Dropdown";
-import NavLink from "react-bootstrap/NavLink";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import NavLink from "react-bootstrap/NavLink";
 
 const React = require("react");
 
@@ -37,12 +37,6 @@ class Header extends React.Component {
                                         <Button id="searchButton" variant="primary" type="submit"><FontAwesomeIcon icon="search" fixedWidth/>&nbsp;Search</Button>
                                     </InputGroup.Append>
                                 </InputGroup>
-                                {/*<div className="form-inline lg">
-                                    <Form.Control id="searchInput" type="text" placeholder="Smiles, Inchi, Inchikey"/>
-                                    <Button id="searchButton" variant="primary" type="submit">
-                                        Search
-                                    </Button>
-                                </div>*/}
                                 <Form.Text className="text-muted">
                                     <a href="">Structure Search</a>
                                     <span> | </span>

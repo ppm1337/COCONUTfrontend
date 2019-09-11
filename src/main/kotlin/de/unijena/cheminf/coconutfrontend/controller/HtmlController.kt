@@ -11,4 +11,9 @@ class HtmlController {
         return "index"
     }
 
+    @RequestMapping("/compound")
+    fun compound(): String {
+        return "compound"
+    }
+
 }
