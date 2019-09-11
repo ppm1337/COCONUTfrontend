@@ -2,11 +2,12 @@ import Browser from "./Browser"
 import Header from "./Header"
 import Introduction from "./Introduction"
 
-import "../resources/css/coconut.css"
-import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/scss/bootstrap.scss"
+import "../resources/scss/coconut.scss"
 
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { fas } from "@fortawesome/free-solid-svg-icons"
+
 library.add(fas);
 
 const React = require("react");
