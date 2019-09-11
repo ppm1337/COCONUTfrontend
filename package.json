@@ -19,8 +19,8 @@
     "react": "^16.9",
     "react-bootstrap": "^1.0.0-beta.12",
     "react-dom": "^16.9",
-    "rest": "^2.0.0",
-    "style-loader": "^1.0.0"
+    "react-router-dom": "^5.0.1",
+    "rest": "^2.0.0"
   },
   "scripts": {
     "watch": "webpack --watch -d"

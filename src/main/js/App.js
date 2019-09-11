@@ -10,6 +10,8 @@ import { fas } from "@fortawesome/free-solid-svg-icons"
 
 library.add(fas);
 
+import { BrowserRouter, Route, Link } from "react-router-dom"
+
 const React = require("react");
 const ReactDOM = require("react-dom");
 
