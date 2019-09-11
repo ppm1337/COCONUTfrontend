@@ -1,5 +1,8 @@
+import Image from "react-bootstrap/Image";
+
+const OpenChemLib = require("openchemlib/full");
 const React = require("react");
-const ReactDOM = require("react-dom");
+
 
 class NaturalProductTableItem extends React.Component {
     constructor(props) {
@@ -7,8 +10,16 @@ class NaturalProductTableItem extends React.Component {
     }
 
     render() {
+        let canvas = document.createElement("canvas");
+        canvas.width = 200;
+        canvas.height = 100;
+
+        const npMolecule = OpenChemLib.Molecule.fromSmiles(this.props.naturalProduct.smiles);
+
+        OpenChemLib.StructureView.drawMolecule(canvas, npMolecule);
+
         return <tr>
-            <td>not implemented yet</td>
+            <td><Image src={canvas.toDataURL()} alt="🥥"/></td>
             <td>not implemented yet</td>
             <td>{this.props.naturalProduct.npl_score}</td>
             <td>{this.props.naturalProduct.molecular_formula}</td>
