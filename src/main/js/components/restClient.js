@@ -7,5 +7,5 @@ const errorCode = require("rest/interceptor/errorCode");
 
 module.exports = rest
     .wrap(mime)
-    .wrap(errorCode)
+    .wrap(errorCode, { code: 400})
     .wrap(defaultRequest, { headers: { "Accept": "application/hal+json" }});
