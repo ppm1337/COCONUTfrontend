@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 class HtmlController {
 
-    @RequestMapping("/")
+    @RequestMapping("/*")
     fun index(): String {
         return "index"
     }

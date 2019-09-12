@@ -28,7 +28,7 @@ class Browser extends React.Component {
             <Row>
                 <Nav variant="pills" defaultActiveKey="/browser/cards">
                     <Nav.Item>
-                        <LinkContainer to="/browser/cards">
+                        <LinkContainer to="/browser/cards" activeClassName="active">
                             <Nav.Link>
                                 <FontAwesomeIcon icon="clipboard-list" fixedWidth/>
                                 &nbsp;Cards
@@ -36,7 +36,7 @@ class Browser extends React.Component {
                         </LinkContainer>
                     </Nav.Item>
                     <Nav.Item>
-                        <LinkContainer to="/browser/table">
+                        <LinkContainer to="/browser/table" activeClassName="active">
                             <Nav.Link>
                                 <FontAwesomeIcon icon="table" fixedWidth/>
                                 &nbsp;Table
@@ -49,8 +49,8 @@ class Browser extends React.Component {
             <Row>
                 <CardBrowser/>
                 <Switch>
-                    <Route exact path="/browser/cards" component={CardBrowser}/>
-                    <Route exact path="/browser/table" component={TableBrowser}/>
+                    <Route path="/browser/cards" component={CardBrowser}/>
+                    <Route path="/browser/table" component={TableBrowser}/>
                 </Switch>
             </Row>
         </Container>

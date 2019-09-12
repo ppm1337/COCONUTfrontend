@@ -11,6 +11,11 @@ import NavItem from "react-bootstrap/NavItem";
 import Dropdown from "react-bootstrap/Dropdown";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import NavLink from "react-bootstrap/NavLink";
+import {Route, Switch} from "react-router-dom";
+import {LinkContainer} from "react-router-bootstrap";
+import CardBrowser from "./CardBrowser";
+import TableBrowser from "./TableBrowser";
+import About from "./About";
 
 const React = require("react");
 
@@ -46,12 +51,22 @@ class Header extends React.Component {
                         </Row>
                         <Row id="headerNav">
                             <Col>
-                                <Nav variant="tabs" defaultActiveKey="/">
+                                <Nav variant="tabs">
                                     <Dropdown as={NavItem}>
                                         <Dropdown.Toggle as={NavLink}>Browser</Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <Dropdown.Item href="/browser"><FontAwesomeIcon icon="table" fixedWidth/>&nbsp;Table Browser</Dropdown.Item>
-                                            <Dropdown.Item><FontAwesomeIcon icon="clipboard-list" fixedWidth/>&nbsp;Card Browser</Dropdown.Item>
+                                            <LinkContainer to="#/browser/table">
+                                                <Dropdown.Item>
+                                                    <FontAwesomeIcon icon="table" fixedWidth/>
+                                                    &nbsp;Table Browser
+                                                </Dropdown.Item>
+                                            </LinkContainer>
+                                            <LinkContainer to="#/browser/cards">
+                                                <Dropdown.Item>
+                                                    <FontAwesomeIcon icon="clipboard-list" fixedWidth/>
+                                                    &nbsp;Card Browser
+                                                </Dropdown.Item>
+                                            </LinkContainer>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                     <Dropdown as={NavItem}>
@@ -65,7 +80,9 @@ class Header extends React.Component {
                                         <Nav.Link href="/download">Download</Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item>
-                                        <Nav.Link href="/about">About</Nav.Link>
+                                        <LinkContainer to="/about">
+                                            <Nav.Link>About</Nav.Link>
+                                        </LinkContainer>
                                     </Nav.Item>
                                 </Nav>
                             </Col>
