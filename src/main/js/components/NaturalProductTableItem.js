@@ -14,9 +14,12 @@ class NaturalProductTableItem extends React.Component {
         canvas.width = 200;
         canvas.height = 100;
 
-        const npMolecule = OpenChemLib.Molecule.fromSmiles(this.props.naturalProduct.smiles);
-
-        OpenChemLib.StructureView.drawMolecule(canvas, npMolecule);
+        try {
+            const npMolecule = OpenChemLib.Molecule.fromSmiles(this.props.naturalProduct.smiles);
+            OpenChemLib.StructureView.drawMolecule(canvas, npMolecule);
+        } catch(e) {
+            console.log(e.name + " in OpenChemLib: " + e.message);
+        }
 
         return <tr>
             <td><Image src={canvas.toDataURL()} alt="🥥" fluid/></td>
