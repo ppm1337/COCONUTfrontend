@@ -19,7 +19,14 @@ class MainPage extends React.Component {
 		return <Router>
 			<React.Fragment>
 				<Header />
-				<Index />
+				<Container fluid className="content">
+					<Switch>
+						<Route exact path="/" component={Index}/>
+						<Route path="/browser" component={Browser}/>
+						<Route path="/download" component={Download}/>
+						<Route path="/about" component={About}/>
+					</Switch>
+				</Container>
 			</React.Fragment>
 		</Router>
 	}

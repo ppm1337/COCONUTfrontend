@@ -1,4 +1,13 @@
 // coconut variable overrides
+
+$grid-breakpoints: (
+        xxl: 1440px
+);
+
+$container-max-widths: (
+        xxl: 1400px
+);
+
 $theme-colors: (
         "primary": #004e8f
 );
@@ -12,7 +21,7 @@ $enable-shadows: true;
 // CSS
 #header {
   background-color: white;
-  padding-top: 20px;
+  padding-top: 15px;
   box-shadow: 0 .2rem 2rem 0 rgba(60,60,60,.15) !important;
 }
 
@@ -39,7 +48,7 @@ $enable-shadows: true;
 #searchInput {
 }
 
-#content {
+.content {
   padding-top: 16%;
 }
 
