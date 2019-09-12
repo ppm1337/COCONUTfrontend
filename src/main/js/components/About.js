@@ -10,7 +10,7 @@ class About extends React.Component {
         return <Container>
             <Row className="justify-content-center">
                 <a href="https://cheminf.uni-jena.de/">
-                    <Image src="https://cheminf.uni-jena.de/wp-content/uploads/2017/12/cropped-Title_dec_2017.png"/>
+                    <Image src="https://cheminf.uni-jena.de/wp-content/uploads/2017/12/cropped-Title_dec_2017.png" fluid/>
                 </a>
             </Row>
             <br/>

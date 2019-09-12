@@ -19,7 +19,7 @@ class NaturalProductTableItem extends React.Component {
         OpenChemLib.StructureView.drawMolecule(canvas, npMolecule);
 
         return <tr>
-            <td><Image src={canvas.toDataURL()} alt="🥥"/></td>
+            <td><Image src={canvas.toDataURL()} alt="🥥" fluid/></td>
             <td>not implemented yet</td>
             <td>{this.props.naturalProduct.npl_score}</td>
             <td>{this.props.naturalProduct.molecular_formula}</td>
