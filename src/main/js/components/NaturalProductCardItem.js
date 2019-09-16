@@ -11,8 +11,8 @@ class NaturalProductCardItem extends React.Component {
 
     render() {
         let canvas = document.createElement("canvas");
-        canvas.width = 400;
-        canvas.height = 300;
+        canvas.width = 280;
+        canvas.height = 200;
 
         try {
             const npMolecule = OpenChemLib.Molecule.fromSmiles(this.props.naturalProduct.smiles);
@@ -21,7 +21,7 @@ class NaturalProductCardItem extends React.Component {
             console.log(e.name + " in OpenChemLib: " + e.message);
         }
 
-        return <Card>
+        return <Card className="cardBrowserItem">
             <Card.Img variant="top" src={canvas.toDataURL()} alt="🥥"/>
             <Card.Body>
                 <Card.Title>

@@ -22,7 +22,7 @@ $enable-shadows: true;
 #header {
   background-color: white;
   padding-top: 15px;
-  box-shadow: 0 .2rem 2rem 0 rgba(60,60,60,.15) !important;
+  box-shadow: 0 .2rem 2rem 0 rgba(60, 60, 60, .15) !important;
 }
 
 #headerIcon {
@@ -49,7 +49,7 @@ $enable-shadows: true;
 }
 
 .content {
-  padding-top: 16%;
+  padding-top: 215px;
 }
 
 h {
@@ -60,18 +60,37 @@ h {
   border-bottom: none !important;
 }
 
-.card {
+.card.cardBrowserItem {
   width: 16rem;
   margin: 2rem;
 }
 
-.card table tr td {
+.card.compoundCardItem {
+  width: 100%;
+}
+
+.card > table tr td {
   font-size: small;
   border: none;
   padding: 0.15rem;
   margin-bottom: 0;
 }
 
+.card {
+  box-shadow: 0 .2rem .5rem 0 rgba(60,60,60,.15) !important;
+}
+
+.compoundCardItem .table tr td:first-child {
+  width: 34%;
+}
+
 .tooltip-inner {
   max-width: 400px;
+}
+
+#compoundCardSidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  padding-top: 215px;
 }
