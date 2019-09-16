@@ -21,13 +21,14 @@ const ReactDOM = require("react-dom");
 
 
 class CompoundPage extends React.Component {
+
 	render() {
 		return <Router>
             <React.Fragment>
                 <Header />
                 <Container fluid className="content">
                     <Switch>
-                        <Route exact path="/compound" component={NaturalProductCompoundCard}/>
+                        <Route path="/compound/:identifier(smiles|inchi|inchikey)/:identifierValue" component={NaturalProductCompoundCard}/>
                         <Route component={NotFound} />
                     </Switch>
                 </Container>

@@ -8,8 +8,9 @@ import TableBrowser from "./TableBrowser";
 import CardBrowser from "./CardBrowser";
 import NaturalProductCardItem from "./NaturalProductCardItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Route, Switch } from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
+import NotFound from "./NotFound";
 
 const React = require("react");
 
@@ -47,10 +48,11 @@ class Browser extends React.Component {
             </Row>
             <br/>
             <Row>
-                <CardBrowser/>
                 <Switch>
                     <Route path="/browser/cards" component={CardBrowser}/>
                     <Route path="/browser/table" component={TableBrowser}/>
+                    <Redirect from="/browser*" to="/browser/cards"/>
+                    <Route component={CardBrowser} />
                 </Switch>
             </Row>
         </Container>

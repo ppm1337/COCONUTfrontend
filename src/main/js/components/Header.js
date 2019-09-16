@@ -55,13 +55,13 @@ class Header extends React.Component {
                                     <Dropdown as={NavItem}>
                                         <Dropdown.Toggle as={NavLink}>Browser</Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <LinkContainer to="#/browser/table">
+                                            <LinkContainer to="/browser/table">
                                                 <Dropdown.Item>
                                                     <FontAwesomeIcon icon="table" fixedWidth/>
                                                     &nbsp;Table Browser
                                                 </Dropdown.Item>
                                             </LinkContainer>
-                                            <LinkContainer to="#/browser/cards">
+                                            <LinkContainer to="/browser/cards">
                                                 <Dropdown.Item>
                                                     <FontAwesomeIcon icon="clipboard-list" fixedWidth/>
                                                     &nbsp;Card Browser

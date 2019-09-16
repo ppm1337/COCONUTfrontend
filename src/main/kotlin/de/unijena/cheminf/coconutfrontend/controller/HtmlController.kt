@@ -6,14 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 class HtmlController {
 
-    @RequestMapping("/*")
-    fun index(): String {
-        return "index"
-    }
-
-    @RequestMapping("/compound")
+    // identifier could be smiles, inchi, inchikey
+    @RequestMapping("/compound/{identifier:smiles|inchi|inchikey}/{identifierValue}")
     fun compound(): String {
         return "compound"
+    }
+
+    @RequestMapping("/*","/browser/*")
+    fun index(): String {
+        return "index"
     }
 
 }
