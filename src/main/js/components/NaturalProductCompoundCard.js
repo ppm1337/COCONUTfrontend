@@ -9,6 +9,7 @@ import {LinkContainer} from "react-router-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Card from "react-bootstrap/Card";
+import {HashRouter} from "react-router-dom";
 
 const React = require("react");
 const OpenChemLib = require("openchemlib/full");
@@ -90,21 +91,23 @@ class NaturalProductCompoundCard extends React.Component {
                     <Row>
                         <Col sm={2}>
                             <Nav className="flex-column" id="compoundCardSidebar">
-                                <LinkContainer to="#overview">
-                                    <Nav.Link className="text-primary">Overview</Nav.Link>
-                                </LinkContainer>
-                                <LinkContainer to="#representations">
-                                    <Nav.Link className="text-primary" eventKey="">Representations</Nav.Link>
-                                </LinkContainer>
-                                <LinkContainer to="#nplikeness">
-                                    <Nav.Link className="text-primary" eventKey="">Natural Product Likeness</Nav.Link>
-                                </LinkContainer>
-                                <LinkContainer to="#molecular_properties">
-                                    <Nav.Link className="text-primary" eventKey="">Molecular properties</Nav.Link>
-                                </LinkContainer>
-                                <LinkContainer to="#computed_properties">
-                                    <Nav.Link className="text-primary" eventKey="">Computed properties</Nav.Link>
-                                </LinkContainer>
+                                <HashRouter hashType="noslash">
+                                    <LinkContainer to="overview" activeClass="active">
+                                        <Nav.Link className="text-primary">Overview</Nav.Link>
+                                    </LinkContainer>
+                                    <LinkContainer to="representations" activeClass="active">
+                                        <Nav.Link className="text-primary">Representations</Nav.Link>
+                                    </LinkContainer>
+                                    <LinkContainer to="nplikeness" activeClass="active">
+                                        <Nav.Link className="text-primary">Natural Product Likeness</Nav.Link>
+                                    </LinkContainer>
+                                    <LinkContainer to="molecular_properties">
+                                        <Nav.Link className="text-primary">Molecular properties</Nav.Link>
+                                    </LinkContainer>
+                                    <LinkContainer to="computed_properties">
+                                        <Nav.Link className="text-primary">Computed properties</Nav.Link>
+                                    </LinkContainer>
+                                </HashRouter>
                             </Nav>
                         </Col>
                         <Col sm={10}>
@@ -211,7 +214,7 @@ class NaturalProductCompoundCard extends React.Component {
                                     <Card.Body>
                                         <Card.Title className="text-primary">Molecular properties</Card.Title>
                                         <br />
-                                        <Table sm>
+                                        <Table size="sm">
                                             <tbody>
                                             <tr>
                                                 <td>Total atom number</td>

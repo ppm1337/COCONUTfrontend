@@ -25,14 +25,6 @@ $enable-shadows: true;
   box-shadow: 0 .2rem 2rem 0 rgba(60, 60, 60, .15) !important;
 }
 
-#headerIcon {
-  /*
-  z-index: -1;
-  content: '🥥';
-  font-size: 128px;
-  */
-}
-
 #headerIconCaption {
   font-size: xx-small;
 }
@@ -65,11 +57,20 @@ h {
   margin: 2rem;
 }
 
-.card.compoundCardItem {
+.compoundCardItem {
   width: 100%;
+
+  &::before {
+    display: block;
+    content: " ";
+    margin-top: -215px;
+    height: 215px;
+    visibility: hidden;
+    pointer-events: none;
+  }
 }
 
-.card > table tr td {
+.card table tr td {
   font-size: small;
   border: none;
   padding: 0.15rem;
