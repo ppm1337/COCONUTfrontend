@@ -14,7 +14,7 @@ class CardBrowser extends React.Component {
     }
 
     componentDidMount() {
-        restClient({method: "GET", path: "/api/search"}).then(response => {
+        restClient({method: "GET", path: "/api/compound"}).then(response => {
             this.setState({naturalProducts: response.entity._embedded.uniqueNaturalProducts});
         });
     }
