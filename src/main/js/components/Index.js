@@ -7,11 +7,13 @@ const React = require("react");
 
 class Index extends React.Component {
     render() {
-        return <Container>
-            <Introduction />
-            <br/>
-            <Browser />
-        </Container>
+        return (
+            <Container>
+                <Introduction />
+                <br/>
+                <Browser />
+            </Container>
+        );
     }
 }
 

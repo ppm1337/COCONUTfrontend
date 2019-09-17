@@ -5,9 +5,11 @@ const React = require("react");
 
 class Download extends React.Component {
     render() {
-        return <Container>
-            <h4>Nothing to see here at the moment...</h4>
-        </Container>;
+        return (
+            <Container>
+                <h4>Nothing to see here at the moment...</h4>
+            </Container>
+        );
     }
 }
 

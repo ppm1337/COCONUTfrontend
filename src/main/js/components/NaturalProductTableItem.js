@@ -21,14 +21,16 @@ class NaturalProductTableItem extends React.Component {
             console.log(e.name + " in OpenChemLib: " + e.message);
         }
 
-        return <tr>
-            <td><Image src={canvas.toDataURL()} alt="🥥" fluid/></td>
-            <td>not implemented yet</td>
-            <td>{this.props.naturalProduct.npl_score}</td>
-            <td>{this.props.naturalProduct.molecular_formula}</td>
-            <td>{this.props.naturalProduct.inchi}</td>
-            <td>{this.props.naturalProduct.inchikey}</td>
-        </tr>
+        return (
+            <tr>
+                <td><Image src={canvas.toDataURL()} alt="🥥" fluid/></td>
+                <td>not implemented yet</td>
+                <td>{this.props.naturalProduct.npl_score}</td>
+                <td>{this.props.naturalProduct.molecular_formula}</td>
+                <td>{this.props.naturalProduct.inchi}</td>
+                <td>{this.props.naturalProduct.inchikey}</td>
+            </tr>
+        );
     }
 }
 

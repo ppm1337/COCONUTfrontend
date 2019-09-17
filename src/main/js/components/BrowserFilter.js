@@ -5,11 +5,13 @@ const React = require("react");
 
 class BrowserFilter extends React.Component {
     render() {
-        return <Container fluid>
-            <Row>
-                <h4>Filters</h4>
-            </Row>
-        </Container>
+        return (
+            <Container fluid>
+                <Row>
+                    <h4>Filters</h4>
+                </Row>
+            </Container>
+        );
     }
 }
 

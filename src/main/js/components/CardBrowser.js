@@ -44,9 +44,7 @@ class CardBrowser extends React.Component {
             </CardDeck>)
         }
 
-        return <Container>
-            {cardRows}
-        </Container>
+        return <Container>{cardRows}</Container>;
     }
 }
 
