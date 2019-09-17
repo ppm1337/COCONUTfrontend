@@ -1,63 +1,94 @@
 import Container from "react-bootstrap/Container"
-import Table from "react-bootstrap/Table"
-import NaturalProductTableItem from "./NaturalProductTableItem";
 import BrowserFilter from "./BrowserFilter";
 import Row from "react-bootstrap/Row";
 import Nav from "react-bootstrap/Nav";
 import TableBrowser from "./TableBrowser";
 import CardBrowser from "./CardBrowser";
-import NaturalProductCardItem from "./NaturalProductCardItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {Redirect, Route, Switch} from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
-import NotFound from "./NotFound";
+import BrowserViewPills from "./BrowserViewPills";
+
 
 const React = require("react");
+const restClient = require("./restClient");
 
 
 class Browser extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            ajaxError: null,
+            ajaxIsLoaded: false,
+            ajaxResult: []
+        };
+    }
+
+    componentDidMount() {
+        restClient({
+            method: "GET",
+            path: "/api/compound"
+        }).then(
+            (response) => {
+                this.setState({
+                    ajaxIsLoaded: true,
+                    ajaxResult: response.entity._embedded.uniqueNaturalProducts
+                });
+            },
+            (error) => {
+                this.setState({
+                    ajaxIsLoaded: true,
+                    ajaxError: error
+                });
+            });
+    }
+
     render() {
-        return (
-            <Container>
-                <Row>
-                    <h2>Component Browser</h2>
-                </Row>
-                <br/>
-                <Row>
-                    <BrowserFilter/>
-                </Row>
-                <br/>
-                <Row>
-                    <Nav variant="pills">
-                        <Nav.Item>
-                            <LinkContainer to="/browser/cards" activeClassName="active">
-                                <Nav.Link>
-                                    <FontAwesomeIcon icon="clipboard-list" fixedWidth/>
-                                    &nbsp;Cards
-                                </Nav.Link>
-                            </LinkContainer>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <LinkContainer to="/browser/table" activeClassName="active">
-                                <Nav.Link>
-                                    <FontAwesomeIcon icon="table" fixedWidth/>
-                                    &nbsp;Table
-                                </Nav.Link>
-                            </LinkContainer>
-                        </Nav.Item>
-                    </Nav>
-                </Row>
-                <br/>
-                <Row>
-                    <Switch>
-                        <Route path="/browser/cards" component={CardBrowser}/>
-                        <Route path="/browser/table" component={TableBrowser}/>
-                        <Redirect from="/browser*" to="/browser/cards"/>
-                        <Route component={CardBrowser} />
-                    </Switch>
-                </Row>
-            </Container>
-        );
+        const { ajaxError, ajaxIsLoaded, ajaxResult } = this.state;
+
+        if (ajaxError) {
+            console.log("Error: " + ajaxError);
+            return (
+                <Container>
+                    <Row>No error page implemented yet .... Check your console.</Row>
+                </Container>
+            );
+        } else if (!ajaxIsLoaded) {
+            return (
+                <Container>
+                    <Row className="justify-content-center"><FontAwesomeIcon icon="spinner" size="6x" spin/></Row>
+                </Container>
+            );
+        } else {
+            console.log("ajaxResult: ", ajaxResult);
+            console.log("state: ", this.state);
+            console.log("props: ", this.props);
+
+            return (
+                <Container>
+                    <Row>
+                        <h2>Component Browser</h2>
+                    </Row>
+                    <br/>
+                    <Row>
+                        <BrowserFilter/>
+                    </Row>
+                    <br/>
+                    <Row>
+                        <BrowserViewPills/>
+                    </Row>
+                    <br/>
+                    <Row>
+                        <Switch>
+                            <Route path="/browser/cards" render={() => <CardBrowser naturalProducts={ajaxResult}/>}/>
+                            <Route path="/browser/table" render={() => <TableBrowser naturalProducts={ajaxResult}/>}/>
+                            <Redirect from="/browser*" to="/browser/cards"/>
+                            <Route component={CardBrowser} />
+                        </Switch>
+                    </Row>
+                </Container>
+            );
+        }
     }
 }
 

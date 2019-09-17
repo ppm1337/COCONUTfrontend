@@ -4,25 +4,13 @@ import CardDeck from "react-bootstrap/CardDeck";
 import Card from "react-bootstrap/Card";
 
 const React = require("react");
-const restClient = require("./restClient");
 
 
 class CardBrowser extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {naturalProducts: []};
-    }
-
-    componentDidMount() {
-        restClient({method: "GET", path: "/api/compound"}).then(response => {
-            this.setState({naturalProducts: response.entity._embedded.uniqueNaturalProducts});
-        });
-    }
-
     render() {
         const cardRowSize = 4;
         let emptyCardKey = 0;
-        let naturalProducts = this.state.naturalProducts;
+        let naturalProducts = this.props.naturalProducts;
         let cardRows = [];
 
         while (naturalProducts.length > 0) {

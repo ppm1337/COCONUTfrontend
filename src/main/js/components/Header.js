@@ -3,19 +3,9 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
-import Nav from 'react-bootstrap/Nav'
-import Image from 'react-bootstrap/Image'
 import Figure from 'react-bootstrap/Figure'
-import InputGroup from "react-bootstrap/InputGroup";
-import NavItem from "react-bootstrap/NavItem";
-import Dropdown from "react-bootstrap/Dropdown";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import NavLink from "react-bootstrap/NavLink";
-import {Route, Switch} from "react-router-dom";
-import {LinkContainer} from "react-router-bootstrap";
-import CardBrowser from "./CardBrowser";
-import TableBrowser from "./TableBrowser";
-import About from "./About";
+import HeaderSearchBar from "./HeaderSearchBar";
+import HeaderNavBar from "./HeaderNavBar";
 
 const React = require("react");
 
@@ -34,60 +24,8 @@ class Header extends React.Component {
                             </Figure>
                         </Col>
                         <Col sm={10} className="align-self-end">
-                            <Row>
-                                <Col>
-                                    <Form.Label><small>Find natural products</small></Form.Label>
-                                    <InputGroup size="md">
-                                        <Form.Control id="searchInput" type="text" placeholder="Smiles, Inchi, Inchikey"/>
-                                        <InputGroup.Append>
-                                            <Button id="searchButton" variant="primary" type="submit"><FontAwesomeIcon icon="search" fixedWidth/>&nbsp;Search</Button>
-                                        </InputGroup.Append>
-                                    </InputGroup>
-                                    <Form.Text className="text-muted">
-                                        <a href="">Structure Search</a>
-                                        <span> | </span>
-                                        <a href="">Advanced Search</a>
-                                    </Form.Text>
-                                </Col>
-                            </Row>
-                            <Row id="headerNav">
-                                <Col>
-                                    <Nav variant="tabs">
-                                        <Dropdown as={NavItem}>
-                                            <Dropdown.Toggle as={NavLink}>Browser</Dropdown.Toggle>
-                                            <Dropdown.Menu>
-                                                <LinkContainer to="/browser/table">
-                                                    <Dropdown.Item>
-                                                        <FontAwesomeIcon icon="table" fixedWidth/>
-                                                        &nbsp;Table Browser
-                                                    </Dropdown.Item>
-                                                </LinkContainer>
-                                                <LinkContainer to="/browser/cards">
-                                                    <Dropdown.Item>
-                                                        <FontAwesomeIcon icon="clipboard-list" fixedWidth/>
-                                                        &nbsp;Card Browser
-                                                    </Dropdown.Item>
-                                                </LinkContainer>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
-                                        <Dropdown as={NavItem}>
-                                            <Dropdown.Toggle as={NavLink}>Search</Dropdown.Toggle>
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item href="/search"><FontAwesomeIcon icon="search-plus" fixedWidth/>&nbsp;Advanced Search</Dropdown.Item>
-                                                <Dropdown.Item><FontAwesomeIcon icon="atom" fixedWidth/>&nbsp;Structure Search</Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
-                                        <Nav.Item>
-                                            <Nav.Link href="/download">Download</Nav.Link>
-                                        </Nav.Item>
-                                        <Nav.Item>
-                                            <LinkContainer to="/about">
-                                                <Nav.Link>About</Nav.Link>
-                                            </LinkContainer>
-                                        </Nav.Item>
-                                    </Nav>
-                                </Col>
-                            </Row>
+                            <HeaderSearchBar/>
+                            <HeaderNavBar/>
                         </Col>
                     </Row>
                 </Container>

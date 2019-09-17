@@ -16,6 +16,7 @@ import Container from "react-bootstrap/Container";
 import Download from "../components/Download";
 import Browser from "../components/Browser";
 import NotFound from "../components/NotFound";
+import SearchResult from "../components/SearchResult";
 
 const React = require("react");
 const ReactDOM = require("react-dom");
@@ -23,20 +24,23 @@ const ReactDOM = require("react-dom");
 
 class MainPage extends React.Component {
 	render() {
-		return <BrowserRouter>
-			<React.Fragment>
-				<Header />
-				<Container fluid className="content">
-					<Switch>
-						<Route exact path="/" component={Index}/>
-						<Route path="/browser*" component={Browser}/>
-						<Route path="/download" component={Download}/>
-						<Route path="/about" component={About}/>
-						<Route component={NotFound} />
-					</Switch>
-				</Container>
-			</React.Fragment>
-		</BrowserRouter>
+		return (
+			<BrowserRouter>
+				<React.Fragment>
+					<Header />
+					<Container fluid className="content">
+						<Switch>
+							<Route exact path="/" component={Index}/>
+							<Route path="/browser*" component={Browser}/>
+							<Route path="/search_result*" component={SearchResult}/>
+							<Route path="/download" component={Download}/>
+							<Route path="/about" component={About}/>
+							<Route component={NotFound} />
+						</Switch>
+					</Container>
+				</React.Fragment>
+			</BrowserRouter>
+		);
 	}
 }
 

@@ -23,17 +23,19 @@ const ReactDOM = require("react-dom");
 class CompoundPage extends React.Component {
 
 	render() {
-		return <Router>
-            <React.Fragment>
-                <Header />
-                <Container fluid className="content">
-                    <Switch>
-                        <Route path="/compound/:identifier(smiles|inchi|inchikey)/:identifierValue" component={NaturalProductCompoundCard}/>
-                        <Route component={NotFound} />
-                    </Switch>
-                </Container>
-            </React.Fragment>
-        </Router>
+		return (
+            <Router>
+                <React.Fragment>
+                    <Header />
+                    <Container fluid className="content">
+                        <Switch>
+                            <Route path="/compound/:identifier(smiles|inchi|inchikey)/:identifierValue" component={NaturalProductCompoundCard}/>
+                            <Route component={NotFound} />
+                        </Switch>
+                    </Container>
+                </React.Fragment>
+            </Router>
+        );
 	}
 }
 
