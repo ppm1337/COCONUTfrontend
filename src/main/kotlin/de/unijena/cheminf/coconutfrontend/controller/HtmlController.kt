@@ -12,7 +12,7 @@ class HtmlController {
         return "compound"
     }
 
-    @RequestMapping("/*","/browser/*")
+    @RequestMapping("/*","/browser/*", "/search/*")
     fun index(): String {
         return "index"
     }

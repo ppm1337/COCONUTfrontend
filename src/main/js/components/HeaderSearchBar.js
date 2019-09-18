@@ -66,9 +66,9 @@ class HeaderSearchBar extends React.Component {
                         </InputGroup.Append>
                     </InputGroup>
                     <Form.Text className="text-muted">
-                        <a href="">Structure Search</a>
+                        <a href="/search/structure">Structure Search</a>
                         <span> | </span>
-                        <a href="">Advanced Search</a>
+                        <a href="/search/advanced">Advanced Search</a>
                     </Form.Text>
                 </Col>
             </Row>

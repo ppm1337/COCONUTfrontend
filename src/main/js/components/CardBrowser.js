@@ -7,29 +7,42 @@ const React = require("react");
 
 
 class CardBrowser extends React.Component {
+    constructor(props) {
+        super(props);
+        this.naturalProducts = [];
+    }
+
+    componentDidMount() {
+        this.naturalProducts = this.props.naturalProducts;
+    }
+
     render() {
         const cardRowSize = 4;
         let emptyCardKey = 0;
-        let naturalProducts = this.props.naturalProducts;
         let cardRows = [];
 
-        while (naturalProducts.length > 0) {
+        while (this.naturalProducts.length > 0) {
             let cardRow = [];
 
-            naturalProducts.splice(0, cardRowSize).map(naturalProduct => {
-                cardRow.push(<NaturalProductCardItem key={naturalProduct._links.self.href}
-                                                     naturalProduct={naturalProduct}/>)
+            this.naturalProducts.splice(0, cardRowSize).map(naturalProduct => {
+                cardRow.push(
+                    <NaturalProductCardItem key={naturalProduct._links.self.href} naturalProduct={naturalProduct}/>
+                );
             });
 
             while (cardRow.length < cardRowSize) {
-                cardRow.push(<Card key={emptyCardKey++} style={{visibility: "hidden"}}>
-                    <Card.Body><Card.Text>empty</Card.Text></Card.Body>
-                </Card>);
+                cardRow.push(
+                    <Card key={emptyCardKey++} style={{visibility: "hidden"}}>
+                        <Card.Body>
+                            <Card.Text>empty</Card.Text>
+                        </Card.Body>
+                    </Card>
+                );
             }
 
-            cardRows.push(<CardDeck key={cardRows.length}>
-                {cardRow}
-            </CardDeck>)
+            cardRows.push(
+                <CardDeck key={cardRows.length}>{cardRow}</CardDeck>
+            );
         }
 
         return <Container>{cardRows}</Container>;

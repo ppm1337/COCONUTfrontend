@@ -7,10 +7,15 @@ const React = require("react");
 class TableBrowser extends React.Component {
     constructor(props) {
         super(props);
+        this.naturalProducts = [];
+    }
+
+    componentDidMount() {
+        this.naturalProducts = this.props.naturalProducts;
     }
 
     render() {
-        const naturalProducts = this.props.naturalProducts.map(naturalProduct =>
+        const naturalProductTableItems = this.naturalProducts.map(naturalProduct =>
             <NaturalProductTableItem key={naturalProduct._links.self.href} naturalProduct={naturalProduct}/>
         );
 
@@ -27,7 +32,7 @@ class TableBrowser extends React.Component {
                 </tr>
                 </thead>
                 <tbody>
-                    {naturalProducts}
+                    {naturalProductTableItems}
                 </tbody>
             </Table>
         );

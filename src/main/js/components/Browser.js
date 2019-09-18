@@ -22,9 +22,15 @@ class Browser extends React.Component {
             ajaxIsLoaded: false,
             ajaxResult: []
         };
+        console.log("Browser props: ", this.props);
+        console.log("Browser state: ", this.state);
     }
 
     componentDidMount() {
+        this.fetchNaturalProducts();
+    }
+
+    fetchNaturalProducts() {
         restClient({
             method: "GET",
             path: "/api/compound"
@@ -47,7 +53,7 @@ class Browser extends React.Component {
         const { ajaxError, ajaxIsLoaded, ajaxResult } = this.state;
 
         if (ajaxError) {
-            console.log("Error: " + ajaxError);
+            console.error("Error: " + ajaxError);
             return (
                 <Container>
                     <Row>No error page implemented yet .... Check your console.</Row>
@@ -60,10 +66,6 @@ class Browser extends React.Component {
                 </Container>
             );
         } else {
-            console.log("ajaxResult: ", ajaxResult);
-            console.log("state: ", this.state);
-            console.log("props: ", this.props);
-
             return (
                 <Container>
                     <Row>

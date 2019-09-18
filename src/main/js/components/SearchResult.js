@@ -1,6 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Introduction from "./Introduction";
 import Browser from "./Browser";
+import CardBrowser from "./CardBrowser";
 
 const React = require("react");
 
@@ -12,7 +13,7 @@ class SearchResult extends React.Component {
     render() {
         return (
             <Container>
-                <Browser naturalProducts={this.props.naturalProducts} />
+                <CardBrowser naturalProducts={this.props.naturalProducts} />
             </Container>
         );
     }

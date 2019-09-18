@@ -17,6 +17,8 @@ import Download from "../components/Download";
 import Browser from "../components/Browser";
 import NotFound from "../components/NotFound";
 import SearchResult from "../components/SearchResult";
+import StructureSearch from "../components/StructureSearch";
+import AdvancedSearch from "../components/AdvancedSearch";
 
 const React = require("react");
 const ReactDOM = require("react-dom");
@@ -32,6 +34,8 @@ class MainPage extends React.Component {
 						<Switch>
 							<Route exact path="/" component={Index}/>
 							<Route path="/browser*" component={Browser}/>
+							<Route path="/search/structure" component={StructureSearch}/>
+							<Route path="/search/advanced" component={AdvancedSearch}/>
 							<Route path="/search_result*" component={SearchResult}/>
 							<Route path="/download" component={Download}/>
 							<Route path="/about" component={About}/>

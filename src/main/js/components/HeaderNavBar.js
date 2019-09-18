@@ -36,18 +36,30 @@ class HeaderNavBar extends React.Component {
                         <Dropdown as={NavItem}>
                             <Dropdown.Toggle as={NavLink}>Search</Dropdown.Toggle>
                             <Dropdown.Menu>
-                                <Dropdown.Item href="/search"><FontAwesomeIcon icon="search-plus" fixedWidth/>&nbsp;Advanced Search</Dropdown.Item>
-                                <Dropdown.Item><FontAwesomeIcon icon="atom" fixedWidth/>&nbsp;Structure Search</Dropdown.Item>
+                                <LinkContainer to="/search/advanced">
+                                    <Dropdown.Item>
+                                        <FontAwesomeIcon icon="search-plus" fixedWidth/>
+                                        &nbsp;Advanced Search
+                                    </Dropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer to="/search/structure">
+                                    <Dropdown.Item>
+                                        <FontAwesomeIcon icon="atom" fixedWidth/>
+                                        &nbsp;Structure Search
+                                    </Dropdown.Item>
+                                </LinkContainer>
                             </Dropdown.Menu>
                         </Dropdown>
-                        <Nav.Item>
-                            <Nav.Link href="/download">Download</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <LinkContainer to="/about">
+                        <LinkContainer to="/download">
+                            <Nav.Item>
+                                <Nav.Link>Download</Nav.Link>
+                            </Nav.Item>
+                        </LinkContainer>
+                        <LinkContainer to="/about">
+                            <Nav.Item>
                                 <Nav.Link>About</Nav.Link>
-                            </LinkContainer>
-                        </Nav.Item>
+                            </Nav.Item>
+                        </LinkContainer>
                     </Nav>
                 </Col>
             </Row>

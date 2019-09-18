@@ -1,4 +1,4 @@
-// coconut variable overrides
+/* coconut variable overrides */
 
 $grid-breakpoints: (
         xxl: 1440px
@@ -15,14 +15,17 @@ $theme-colors: (
 $enable-rounded: false;
 $enable-shadows: true;
 
-// Bootstrap and its default variables
+$coconut-box-shadow: 0 .2rem .5rem 0 rgba(60, 60, 60, .15) !important;
+$coconut-header-height: 215px;
+
+/* bootstrap and its default variables */
 @import "~bootstrap/scss/bootstrap";
 
-// CSS
+/* CSS */
 #header {
   background-color: white;
   padding-top: 15px;
-  box-shadow: 0 .2rem 2rem 0 rgba(60, 60, 60, .15) !important;
+  box-shadow: $coconut-box-shadow;
 }
 
 #headerIconCaption {
@@ -41,7 +44,7 @@ $enable-shadows: true;
 }
 
 .content {
-  padding-top: 215px;
+  padding-top: $coconut-header-height;
 }
 
 h {
@@ -63,8 +66,8 @@ h {
   &::before {
     display: block;
     content: " ";
-    margin-top: -215px;
-    height: 215px;
+    margin-top: -$coconut-header-height;
+    height: $coconut-header-height;
     visibility: hidden;
     pointer-events: none;
   }
@@ -78,7 +81,7 @@ h {
 }
 
 .card {
-  box-shadow: 0 .2rem .5rem 0 rgba(60,60,60,.15) !important;
+  box-shadow: $coconut-box-shadow;
 }
 
 .compoundCardItem .table tr td:first-child {
@@ -93,5 +96,12 @@ h {
   position: fixed;
   top: 0;
   bottom: 0;
-  padding-top: 215px;
+  padding-top: $coconut-header-height;
+}
+
+#structureSearchEditor {
+  width: 720px;
+  height: 405px;
+  border: thin solid map_get($theme-colors, "primary");
+  box-shadow: $coconut-box-shadow
 }
