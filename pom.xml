@@ -81,7 +81,7 @@
 
 		<dependency>
 			<groupId>org.openscience.cdk</groupId>
-			<artifactId>cdk-bundle</artifactId>
+			<artifactId>cdk-smiles</artifactId>
 			<version>2.3</version>
 		</dependency>
 	</dependencies>
@@ -104,27 +104,13 @@
 				</configuration>
 				<executions>
 					<execution>
-						<id>bower install</id>
-						<goals>
-							<goal>bower</goal>
-						</goals>
-
-						<configuration>
-							<!-- optional: The default argument is actually
-                            "install", so unless you need to run some other bower command,
-                            you can remove this whole <configuration> section.
-                            -->
-							<arguments>install</arguments>
-						</configuration>
-					</execution>
-					<execution>
 						<id>install node and npm</id>
 						<goals>
 							<goal>install-node-and-npm</goal>
 						</goals>
 						<configuration>
-							<nodeVersion>v10.16.3</nodeVersion>
-							<npmVersion>6.11.2</npmVersion>
+							<nodeVersion>v12.10.0</nodeVersion>
+							<npmVersion>6.11.3</npmVersion>
 						</configuration>
 					</execution>
 					<execution>
@@ -144,12 +130,6 @@
 
 						<!-- optional: the default phase is "generate-resources" -->
 						<phase>generate-resources</phase>
-
-						<configuration>
-							<!-- optional: if not specified, it will run webpack's default
-                            build (and you can remove this whole <configuration> section.) -->
-							<arguments>-p</arguments>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
