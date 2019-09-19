@@ -26,18 +26,21 @@ class HeaderSearchBar extends React.Component {
             searchSubmitted: true
         });
 
-        const button = document.getElementById("searchButtonIcon");
-        button.setAttribute("icon", "spinner");
-        button.setAttribute("spin", "");
+        let searchButtonIcon = document.getElementById("searchButtonIcon");
+        searchButtonIcon.setAttribute("icon", "spinner");
+        searchButtonIcon.setAttribute("spin", "");
 
         const searchInputText = document.getElementById("searchInput").value;
+        this.doSearch(searchInputText);
+    }
 
+    doSearch() {
         restClient({
             method: "GET",
-            path: "/api/compound/search/findByInchikey?inchikey=" + searchInputText
+            path: "/api/search/simple?query=" + encodeURIComponent(searchInputText)
         }).then(
             (response) => {
-                console.log("the search was triggered and received a response...");
+                console.log("the search was triggered and received a response...", response);
                 this.setState({
                     searchIsLoaded: true,
                     searchResult: response.entity._embedded.naturalProducts
@@ -57,7 +60,7 @@ class HeaderSearchBar extends React.Component {
                 <Col>
                     <Form.Label><small>Find natural products</small></Form.Label>
                     <InputGroup>
-                        <Form.Control id="searchInput" type="text" placeholder="Smiles, Inchi, Inchikey"/>
+                        <Form.Control id="searchInput" type="text" placeholder="Smiles, Inchi or Inchikey"/>
                         <InputGroup.Append>
                             <Button id="searchButton" variant="primary" type="submit" onClick={this.handleSearchSubmit}>
                                 <FontAwesomeIcon id="searchButtonIcon" icon="search" fixedWidth/>
