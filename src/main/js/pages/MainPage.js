@@ -9,8 +9,6 @@ library.add(fas);
 import Header from "../components/Header"
 import Index from "../components/Index";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import CardBrowser from "../components/CardBrowser";
-import TableBrowser from "../components/TableBrowser";
 import About from "../components/About";
 import Container from "react-bootstrap/Container";
 import Download from "../components/Download";
@@ -19,6 +17,7 @@ import NotFound from "../components/NotFound";
 import SearchResult from "../components/SearchResult";
 import StructureSearch from "../components/StructureSearch";
 import AdvancedSearch from "../components/AdvancedSearch";
+import NaturalProductCompoundCard from "../components/NaturalProductCompoundCard";
 
 const React = require("react");
 const ReactDOM = require("react-dom");
@@ -33,12 +32,13 @@ class MainPage extends React.Component {
 					<Container fluid className="content">
 						<Switch>
 							<Route exact path="/" component={Index}/>
+							<Route path="/about" component={About}/>
 							<Route path="/browser*" component={Browser}/>
+							<Route path="/compound/:identifier(smiles|inchi|inchikey)/:identifierValue" component={NaturalProductCompoundCard}/>
+							<Route path="/download" component={Download}/>
 							<Route path="/search/structure" component={StructureSearch}/>
 							<Route path="/search/advanced" component={AdvancedSearch}/>
 							<Route path="/search_result*" component={SearchResult}/>
-							<Route path="/download" component={Download}/>
-							<Route path="/about" component={About}/>
 							<Route component={NotFound} />
 						</Switch>
 					</Container>
@@ -50,5 +50,5 @@ class MainPage extends React.Component {
 
 ReactDOM.render(
 	<MainPage />,
-	document.getElementById("main_page_viewport")
+	document.getElementById("viewport")
 );

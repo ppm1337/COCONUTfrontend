@@ -1,7 +1,6 @@
 module.exports = {
     entry: {
-        index: "./src/main/js/pages/MainPage.js",
-        compound: "./src/main/js/pages/CompoundPage.js"
+        index: "./src/main/js/pages/MainPage.js"
     },
     devtool: "sourcemaps",
     cache: true,
