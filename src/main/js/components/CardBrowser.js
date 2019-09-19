@@ -9,24 +9,20 @@ const React = require("react");
 class CardBrowser extends React.Component {
     constructor(props) {
         super(props);
-        this.naturalProducts = [];
-    }
-
-    componentDidMount() {
-        this.naturalProducts = this.props.naturalProducts;
     }
 
     render() {
         const cardRowSize = 4;
+        let naturalProducts = this.props.naturalProducts;
         let emptyCardKey = 0;
         let cardRows = [];
 
-        while (this.naturalProducts.length > 0) {
+        while (naturalProducts.length > 0) {
             let cardRow = [];
 
-            this.naturalProducts.splice(0, cardRowSize).map(naturalProduct => {
+            naturalProducts.splice(0, cardRowSize).map(naturalProduct => {
                 cardRow.push(
-                    <NaturalProductCardItem key={naturalProduct._links.self.href} naturalProduct={naturalProduct}/>
+                    <NaturalProductCardItem key={naturalProduct.inchikey} naturalProduct={naturalProduct}/>
                 );
             });
 

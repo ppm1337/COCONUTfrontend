@@ -78,6 +78,12 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<version>2.1.7.RELEASE</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.openscience.cdk</groupId>
+			<artifactId>cdk-bundle</artifactId>
+			<version>2.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>

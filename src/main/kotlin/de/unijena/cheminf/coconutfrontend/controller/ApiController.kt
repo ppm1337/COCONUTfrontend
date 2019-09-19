@@ -1,8 +1,16 @@
 package de.unijena.cheminf.coconutfrontend.controller
 
+import de.unijena.cheminf.npopensourcecollector.mongocollections.UniqueNaturalProduct
 import de.unijena.cheminf.npopensourcecollector.mongocollections.UniqueNaturalProductRepository
+import org.openscience.cdk.interfaces.IAtomContainer
+import org.openscience.cdk.silent.SilentChemObjectBuilder
+import org.openscience.cdk.smiles.SmiFlavor
+import org.openscience.cdk.smiles.SmilesGenerator
+import org.openscience.cdk.smiles.SmilesParser
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.net.URLDecoder
 
 @RestController
 @RequestMapping("/api")
@@ -14,4 +22,20 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
     * see @RepositoryRestResource annotation in repository class(es)
     *
     */
+
+    val smilesParser: SmilesParser = SmilesParser(SilentChemObjectBuilder.getInstance())
+    val smilesGenerator: SmilesGenerator = SmilesGenerator(SmiFlavor.Unique)
+
+    @RequestMapping("/search/structure")
+    fun structureSearchBySmiles(@RequestParam("smiles") encodedSmiles: String): List<UniqueNaturalProduct> {
+        val smiles = URLDecoder.decode(encodedSmiles, "UTF-8")
+
+        val parsedSmiles: IAtomContainer = this.smilesParser.parseSmiles(smiles)
+        val canonicalSmiles: String = this.smilesGenerator.create(parsedSmiles)
+
+        println("Input Smiles: $smiles")
+        println("Canonical Smiles: $canonicalSmiles")
+
+        return this.uniqueNaturalProductRepository.findByCleanSmiles(canonicalSmiles)
+    }
 }
