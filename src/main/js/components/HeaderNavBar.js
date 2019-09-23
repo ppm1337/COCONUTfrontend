@@ -50,16 +50,12 @@ export default class HeaderNavBar extends React.Component {
                                 </LinkContainer>
                             </Dropdown.Menu>
                         </Dropdown>
-                        <LinkContainer to="/download">
-                            <Nav.Item>
-                                <Nav.Link>Download</Nav.Link>
-                            </Nav.Item>
-                        </LinkContainer>
-                        <LinkContainer to="/about">
-                            <Nav.Item>
-                                <Nav.Link>About</Nav.Link>
-                            </Nav.Item>
-                        </LinkContainer>
+                        <Nav.Item>
+                            <Nav.Link href="/download">Download</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link href="/about">About</Nav.Link>
+                        </Nav.Item>
                     </Nav>
                 </Col>
             </Row>
