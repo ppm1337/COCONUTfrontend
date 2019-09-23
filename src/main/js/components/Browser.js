@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {Redirect, Route, Switch} from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import BrowserViewPills from "./BrowserViewPills";
+import Spinner from "./Spinner";
+import Error from "./ErrorPage";
 
 
 const React = require("react");
@@ -53,18 +55,9 @@ export default class Browser extends React.Component {
         const { ajaxError, ajaxIsLoaded, ajaxResult } = this.state;
 
         if (ajaxError) {
-            console.error("Error: " + ajaxError);
-            return (
-                <Container>
-                    <Row>No error page implemented yet .... Check your console.</Row>
-                </Container>
-            );
+            return <Error/>
         } else if (!ajaxIsLoaded) {
-            return (
-                <Container>
-                    <Row className="justify-content-center"><FontAwesomeIcon icon="spinner" size="6x" spin/></Row>
-                </Container>
-            );
+            return <Spinner/>
         } else {
             return (
                 <Container>
