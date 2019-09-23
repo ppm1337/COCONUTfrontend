@@ -30,14 +30,13 @@ export default class HeaderSearchBar extends React.Component {
         searchButtonIcon.setAttribute("icon", "spinner");
         searchButtonIcon.setAttribute("spin", "");
 
-        const searchInputText = document.getElementById("searchInput").value;
-        this.doSearch(searchInputText);
+        this.doSearch(document.getElementById("searchInput").value);
     }
 
-    doSearch() {
+    doSearch(queryString) {
         restClient({
             method: "GET",
-            path: "/api/search/simple?query=" + encodeURIComponent(searchInputText)
+            path: "/api/search/simple?query=" + encodeURIComponent(queryString)
         }).then(
             (response) => {
                 console.log("the search was triggered and received a response...", response);
