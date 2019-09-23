@@ -6,10 +6,14 @@ const React = require("react");
 
 
 export default class Spinner extends React.Component {
+    constructor(props) {
+        super(props);
+        this.size = this.props.size || "3x";
+    }
     render() {
         return(
             <Container>
-                <Row className="justify-content-center"><FontAwesomeIcon icon="spinner" size="4x" spin/></Row>
+                <Row className="justify-content-center"><FontAwesomeIcon icon="spinner" size={this.size} spin/></Row>
             </Container>
         );
     }
