@@ -9,7 +9,7 @@ const React = require("react");
 const restClient = require("./restClient");
 
 
-class HeaderSearchBar extends React.Component {
+export default class HeaderSearchBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -78,5 +78,3 @@ class HeaderSearchBar extends React.Component {
         );
     }
 }
-
-export default HeaderSearchBar

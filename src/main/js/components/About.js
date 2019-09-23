@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 
 const React = require("react");
 
-class About extends React.Component {
+export default class About extends React.Component {
     render() {
         return (
             <Container>
@@ -26,5 +26,3 @@ class About extends React.Component {
         );
     }
 }
-
-export default About

@@ -14,7 +14,7 @@ const React = require("react");
 const restClient = require("./restClient");
 
 
-class Browser extends React.Component {
+export default class Browser extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -93,5 +93,3 @@ class Browser extends React.Component {
         }
     }
 }
-
-export default Browser

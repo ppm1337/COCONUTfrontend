@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 
 const React = require("react");
 
-class BrowserFilter extends React.Component {
+export default class BrowserFilter extends React.Component {
     render() {
         return (
             <Container fluid>
@@ -14,5 +14,3 @@ class BrowserFilter extends React.Component {
         );
     }
 }
-
-export default BrowserFilter

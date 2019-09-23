@@ -6,7 +6,7 @@ import Card from "react-bootstrap/Card";
 const React = require("react");
 
 
-class CardBrowser extends React.Component {
+export default class CardBrowser extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -44,5 +44,3 @@ class CardBrowser extends React.Component {
         return <Container>{cardRows}</Container>;
     }
 }
-
-export default CardBrowser

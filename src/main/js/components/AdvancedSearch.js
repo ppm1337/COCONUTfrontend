@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 
 const React = require("react");
 
-class AdvancedSearch extends React.Component {
+export default class AdvancedSearch extends React.Component {
     render() {
         return (
             <Container>
@@ -17,5 +17,3 @@ class AdvancedSearch extends React.Component {
         );
     }
 }
-
-export default AdvancedSearch

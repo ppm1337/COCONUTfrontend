@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 
 const React = require("react");
 
-class BrowserViewPills extends React.Component {
+export default class BrowserViewPills extends React.Component {
     render() {
         return (
             <Nav variant="pills">
@@ -29,5 +29,3 @@ class BrowserViewPills extends React.Component {
         );
     }
 }
-
-export default BrowserViewPills

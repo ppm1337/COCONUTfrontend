@@ -10,7 +10,7 @@ import HeaderNavBar from "./HeaderNavBar";
 const React = require("react");
 
 
-class Header extends React.Component {
+export default class Header extends React.Component {
     render() {
         return (
             <Container fluid id="header" className="fixed-top border-bottom">
@@ -33,5 +33,3 @@ class Header extends React.Component {
         );
     }
 }
-
-export default Header

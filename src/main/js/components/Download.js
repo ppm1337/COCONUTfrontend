@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container'
 const React = require("react");
 
 
-class Download extends React.Component {
+export default class Download extends React.Component {
     render() {
         return (
             <Container>
@@ -12,5 +12,3 @@ class Download extends React.Component {
         );
     }
 }
-
-export default Download

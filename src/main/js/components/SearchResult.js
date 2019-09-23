@@ -5,7 +5,7 @@ import CardBrowser from "./CardBrowser";
 
 const React = require("react");
 
-class SearchResult extends React.Component {
+export default class SearchResult extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -18,5 +18,3 @@ class SearchResult extends React.Component {
         );
     }
 }
-
-export default SearchResult

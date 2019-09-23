@@ -10,7 +10,7 @@ import Row from "react-bootstrap/Row";
 const React = require("react");
 
 
-class HeaderNavBar extends React.Component {
+export default class HeaderNavBar extends React.Component {
     render() {
         return (
             <Row id="headerNav">
@@ -66,5 +66,3 @@ class HeaderNavBar extends React.Component {
         );
     }
 }
-
-export default HeaderNavBar

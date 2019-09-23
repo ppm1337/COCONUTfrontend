@@ -4,7 +4,7 @@ import Table from "react-bootstrap/Table";
 const OpenChemLib = require("openchemlib/full");
 const React = require("react");
 
-class NaturalProductCardItem extends React.Component {
+export default class NaturalProductCardItem extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -50,5 +50,3 @@ class NaturalProductCardItem extends React.Component {
         );
     }
 }
-
-export default NaturalProductCardItem

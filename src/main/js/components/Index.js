@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 const React = require("react");
 
 
-class Index extends React.Component {
+export default class Index extends React.Component {
     render() {
         return (
             <Container>
@@ -16,5 +16,3 @@ class Index extends React.Component {
         );
     }
 }
-
-export default Index

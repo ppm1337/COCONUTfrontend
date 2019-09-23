@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row"
 
 const React = require("react");
 
-class Introduction extends React.Component {
+export default class Introduction extends React.Component {
     render() {
         return (
             <Container>
@@ -15,5 +15,3 @@ class Introduction extends React.Component {
         );
     }
 }
-
-export default Introduction

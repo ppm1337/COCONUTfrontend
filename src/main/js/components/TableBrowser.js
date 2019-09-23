@@ -4,7 +4,7 @@ import NaturalProductTableItem from "./NaturalProductTableItem";
 const React = require("react");
 
 
-class TableBrowser extends React.Component {
+export default class TableBrowser extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -33,5 +33,3 @@ class TableBrowser extends React.Component {
         );
     }
 }
-
-export default TableBrowser

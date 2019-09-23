@@ -16,7 +16,7 @@ const OpenChemLib = require("openchemlib/full");
 const restClient = require("./restClient");
 
 
-class NaturalProductCompoundCard extends React.Component {
+export default class NaturalProductCompoundCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -368,5 +368,3 @@ class NaturalProductCompoundCard extends React.Component {
         }
     }
 }
-
-export default NaturalProductCompoundCard

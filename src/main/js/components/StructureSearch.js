@@ -10,7 +10,7 @@ const React = require("react");
 const OpenChemLib = require("openchemlib/full");
 const restClient = require("./restClient");
 
-class StructureSearch extends React.Component {
+export default class StructureSearch extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -134,5 +134,3 @@ class StructureSearch extends React.Component {
         );
     }
 }
-
-export default StructureSearch

@@ -4,7 +4,7 @@ const OpenChemLib = require("openchemlib/full");
 const React = require("react");
 
 
-class NaturalProductTableItem extends React.Component {
+export default class NaturalProductTableItem extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -33,5 +33,3 @@ class NaturalProductTableItem extends React.Component {
         );
     }
 }
-
-export default NaturalProductTableItem
