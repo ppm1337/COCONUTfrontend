@@ -27,4 +27,6 @@ hs_err_pid*
 
 # build folder
 target
-/node_modules/
+node_modules/
+out/
+src/main/resources/static/built
