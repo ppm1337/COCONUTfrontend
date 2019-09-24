@@ -10,8 +10,8 @@
   "author": "Peter Merseburger",
   "license": "MIT",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.24",
-    "@fortawesome/free-solid-svg-icons": "^5.11.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
@@ -27,9 +27,11 @@
     "watch": "webpack --watch -d"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.0",
-    "@babel/preset-env": "^7.6.0",
+    "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0",
+    "@welldone-software/why-did-you-render": "^3.3.5",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0",
     "css-loader": "^3.2.0",

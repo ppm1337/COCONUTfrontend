@@ -22,6 +22,11 @@ import NaturalProductCompoundCard from "../components/NaturalProductCompoundCard
 const React = require("react");
 const ReactDOM = require("react-dom");
 
+if (process.env.NODE_ENV !== "production") {
+	const whyDidYouRender = require("@welldone-software/why-did-you-render");
+	whyDidYouRender(React);
+}
+
 
 class MainPage extends React.Component {
 	render() {
