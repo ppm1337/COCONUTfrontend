@@ -10,10 +10,13 @@ export default class Spinner extends React.Component {
         super(props);
         this.size = this.props.size || "3x";
     }
+
     render() {
         return(
             <Container>
-                <Row className="justify-content-center"><FontAwesomeIcon icon="spinner" size={this.size} spin/></Row>
+                <Row className="justify-content-center">
+                    <FontAwesomeIcon icon="spinner" size={this.size} spin/>
+                </Row>
             </Container>
         );
     }
