@@ -5,11 +5,8 @@ const OpenChemLib = require("openchemlib/full");
 const React = require("react");
 
 export default class NaturalProductCardItem extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
+        const linkToCompoundPage = "/compound/inchikey/" + this.props.naturalProduct.inchikey;
         let canvas = document.createElement("canvas");
         canvas.width = 280;
         canvas.height = 200;
@@ -26,7 +23,7 @@ export default class NaturalProductCardItem extends React.Component {
                 <Card.Img variant="top" src={canvas.toDataURL()} alt="🥥"/>
                 <Card.Body>
                     <Card.Title>
-                        <Card.Link href=""><small>{this.props.naturalProduct.inchikey}</small></Card.Link>
+                        <Card.Link href={linkToCompoundPage}><small>{this.props.naturalProduct.inchikey}</small></Card.Link>
                     </Card.Title>
                     <Card.Subtitle>name goes here</Card.Subtitle>
                     <Table>
