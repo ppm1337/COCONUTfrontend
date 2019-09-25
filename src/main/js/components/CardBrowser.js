@@ -2,19 +2,12 @@ import Container from "react-bootstrap/Container";
 import NaturalProductCardItem from "./NaturalProductCardItem";
 import CardDeck from "react-bootstrap/CardDeck";
 import Card from "react-bootstrap/Card";
+import {LinkContainer} from "react-router-bootstrap";
 
 const React = require("react");
 
 
 export default class CardBrowser extends React.Component {
-    shouldComponentUpdate() {
-        if (this.props.naturalProducts === []) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     render() {
         const cardRowSize = 4;
         let naturalProducts = this.props.naturalProducts;
@@ -40,9 +33,7 @@ export default class CardBrowser extends React.Component {
                 );
             }
 
-            cardRows.push(
-                <CardDeck key={cardRows.length}>{cardRow}</CardDeck>
-            );
+            cardRows.push(<CardDeck key={cardRows.length}>{cardRow}</CardDeck>);
         }
 
         return <Container>{cardRows}</Container>;

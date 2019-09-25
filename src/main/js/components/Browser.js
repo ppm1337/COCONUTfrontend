@@ -20,12 +20,12 @@ const restClient = require("./restClient");
 export default class Browser extends React.Component {
     constructor(props) {
         super(props);
-        this.CardBrowser =  this.withSubscription(CardBrowser);
-        this.TableBrowser = this.withSubscription(TableBrowser);
+        this.state = {
+            currentPage: 0
+        };
     }
 
-
-    withSubscription(ViewComponent) {
+    withSubscription(ViewComponent, pageNumber) {
         return class extends React.Component {
             constructor(props) {
                 super(props);
@@ -37,8 +37,7 @@ export default class Browser extends React.Component {
                     },
                     stats: {
                         totalCompoundCount: null,
-                        totalPageCount: null,
-                        currentPage: null
+                        totalPageCount: null
                     }
                 };
             }
@@ -47,7 +46,7 @@ export default class Browser extends React.Component {
                 this.fetchNaturalProducts();
             }
 
-            fetchNaturalProducts(link = "/api/compound") {
+            fetchNaturalProducts(link = "/api/compound?page=" + pageNumber) {
                 restClient({
                     method: "GET",
                     path: link
@@ -60,8 +59,7 @@ export default class Browser extends React.Component {
                             },
                             stats: {
                                 totalCompoundCount: response.entity.page.totalElements,
-                                totalPageCount: response.entity.page.totalPages,
-                                currentPage: response.entity.page.number
+                                totalPageCount: response.entity.page.totalPages
                             }
                         });
                     },
@@ -83,6 +81,8 @@ export default class Browser extends React.Component {
                 } else if (!isLoaded) {
                     return <Spinner/>
                 } else {
+                    const displayPageNumber = pageNumber + 1;
+
                     return (
                         <Container>
                             <Row>
@@ -98,16 +98,15 @@ export default class Browser extends React.Component {
                             </Row>
                             <br/>
                             <Row>
-                                <p>There are {this.state.stats.totalCompoundCount} compounds.</p>
+                                <p>There are {this.state.stats.totalCompoundCount} unique natural products in the database.</p>
                             </Row>
                             <Row>
-                                {/*<BrowserPagination stats={this.state.stats} pointer={this.state.pointer}/>*/}
                                 <Pagination>
                                     <Pagination.First />
                                     <Pagination.Prev />
-                                    <Pagination.Item>{1}</Pagination.Item>
-                                    <Pagination.Item>{2}</Pagination.Item>
-                                    <Pagination.Item>{3}</Pagination.Item>
+                                    <Pagination.Item>{displayPageNumber}</Pagination.Item>
+                                    <Pagination.Item>{displayPageNumber + 1}</Pagination.Item>
+                                    <Pagination.Item>{displayPageNumber + 2}</Pagination.Item>
                                     <Pagination.Ellipsis/>
                                     <Pagination.Item>{this.state.stats.totalPageCount}</Pagination.Item>
                                     <Pagination.Next />
@@ -126,10 +125,13 @@ export default class Browser extends React.Component {
     }
 
     render() {
+        const CardBrowserWithSubscription = this.withSubscription(CardBrowser, this.state.currentPage);
+        const TableBrowserWithSubscription = this.withSubscription(TableBrowser, this.state.currentPage);
+
         return (
             <Switch>
-                <Route path="/browser/cards" render={() => React.createElement(this.CardBrowser)}/>
-                <Route path="/browser/table" render={() => React.createElement(this.TableBrowser)}/>
+                <Route path="/browser/cards" component={CardBrowserWithSubscription}/>
+                <Route path="/browser/table" component={TableBrowserWithSubscription}/>
                 <Redirect from="/browser*" to="/browser/cards"/>
             </Switch>
         );

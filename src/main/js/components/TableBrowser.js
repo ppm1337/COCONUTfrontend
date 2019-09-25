@@ -5,14 +5,6 @@ const React = require("react");
 
 
 export default class TableBrowser extends React.Component {
-    shouldComponentUpdate() {
-        if (this.props.naturalProducts === []) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     render() {
         const naturalProductTableItems = this.props.naturalProducts.map(naturalProduct =>
             <NaturalProductTableItem key={naturalProduct.inchikey} naturalProduct={naturalProduct}/>
