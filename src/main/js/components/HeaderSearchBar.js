@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {LinkContainer} from "react-router-bootstrap";
 
 const React = require("react");
 const restClient = require("./restClient");
@@ -67,10 +68,14 @@ export default class HeaderSearchBar extends React.Component {
                             </Button>
                         </InputGroup.Append>
                     </InputGroup>
-                    <Form.Text className="text-muted">
-                        <a href="/search/structure">Structure Search</a>
+                    <Form.Text>
+                        <LinkContainer to="/search/structure">
+                            <a className="text-primary">Structure Search</a>
+                        </LinkContainer>
                         <span> | </span>
-                        <a href="/search/advanced">Advanced Search</a>
+                        <LinkContainer to="/search/advanced">
+                            <a className="text-primary">Advanced Search</a>
+                        </LinkContainer>
                     </Form.Text>
                 </Col>
             </Row>
