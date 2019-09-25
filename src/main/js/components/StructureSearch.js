@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import SearchResult from "./SearchResult";
 import Col from "react-bootstrap/Col";
+import Spinner from "./Spinner";
 
 const React = require("react");
 const OpenChemLib = require("openchemlib/full");
@@ -85,7 +86,7 @@ export default class StructureSearch extends React.Component {
             );
 
             if (!ajaxIsLoaded) {
-                resultRow = <Row className="justify-content-center"><FontAwesomeIcon icon="spinner" size="6x" spin/></Row>;
+                resultRow = <Row className="justify-content-center"><Spinner/></Row>;
             } else {
                 if (ajaxResult.length > 0) {
                     resultRow = <SearchResult naturalProducts={ajaxResult}/>;

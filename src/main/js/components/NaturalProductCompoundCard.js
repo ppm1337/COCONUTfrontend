@@ -10,6 +10,8 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Card from "react-bootstrap/Card";
 import {HashRouter} from "react-router-dom";
+import Spinner from "./Spinner";
+import Error from "./Error";
 
 const React = require("react");
 const OpenChemLib = require("openchemlib/full");
@@ -56,20 +58,9 @@ export default class NaturalProductCompoundCard extends React.Component {
         const { error, isLoaded, naturalProduct } = this.state;
 
         if (error) {
-            console.log("Error: " + error);
-            return (
-                <Container>
-                    <Row>No error page implemented yet .... Check your console.</Row>
-                </Container>
-            );
-        }
-
-        if (!isLoaded) {
-            return (
-                <Container>
-                    <Row className="justify-content-center"><FontAwesomeIcon icon="spinner" size="6x" spin /></Row>
-                </Container>
-            );
+            return <Error/>;
+        } else if (!isLoaded) {
+            return <Spinner/>;
         } else {
             let canvas = document.createElement("canvas");
             canvas.width = 400;
@@ -92,13 +83,13 @@ export default class NaturalProductCompoundCard extends React.Component {
                         <Col sm={2}>
                             <Nav className="flex-column" id="compoundCardSidebar">
                                 <HashRouter hashType="noslash">
-                                    <LinkContainer to="overview" activeClass="active">
+                                    <LinkContainer to="overview">
                                         <Nav.Link className="text-primary">Overview</Nav.Link>
                                     </LinkContainer>
-                                    <LinkContainer to="representations" activeClass="active">
+                                    <LinkContainer to="representations">
                                         <Nav.Link className="text-primary">Representations</Nav.Link>
                                     </LinkContainer>
-                                    <LinkContainer to="nplikeness" activeClass="active">
+                                    <LinkContainer to="nplikeness">
                                         <Nav.Link className="text-primary">Natural Product Likeness</Nav.Link>
                                     </LinkContainer>
                                     <LinkContainer to="molecular_properties">
@@ -118,7 +109,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                         <br />
                                         <Row>
                                             <Col sm={4}>
-                                                <Image src={canvas.toDataURL()} alt={<FontAwesomeIcon icon="file-image" size="4x"/>} fluid/>
+                                                <Image src={canvas.toDataURL()} alt={<FontAwesomeIcon icon="file-image" size="3x"/>} fluid/>
                                             </Col>
                                             <Col sm={8}>
                                                 <Table size="sm">
