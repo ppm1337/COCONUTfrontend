@@ -7,8 +7,12 @@ const React = require("react");
 
 
 export default class CardBrowser extends React.Component {
-    constructor(props) {
-        super(props);
+    shouldComponentUpdate() {
+        if (this.props.naturalProducts === []) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     render() {
