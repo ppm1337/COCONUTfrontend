@@ -42,7 +42,6 @@ class MainPage extends React.Component {
 							<Route path="/download" component={Download}/>
 							<Route path="/search/structure" component={StructureSearch}/>
 							<Route path="/search/advanced" component={AdvancedSearch}/>
-							<Route path="/search_result*" component={SearchResult}/>
 							<Route component={NotFound} />
 						</Switch>
 					</Container>

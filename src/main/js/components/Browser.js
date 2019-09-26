@@ -114,6 +114,9 @@ export default class Browser extends React.Component {
 
                     return (
                         <Container>
+                            <Row>
+                                <h2>Component Browser</h2>
+                            </Row>
                             <br/>
                             <Row>
                                 <BrowserFilter/>

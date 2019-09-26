@@ -36,11 +36,11 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
     }
 
     @RequestMapping("/search/simple")
-    fun simpleSearch(@RequestParam("query") encodedQueryString: String): List<UniqueNaturalProduct> {
-        val queryString = URLDecoder.decode(encodedQueryString, "UTF-8")
+    fun simpleSearch(@RequestParam("query") encodedQueryString: String): Map<String, Any> {
+        // val queryString = URLDecoder.decode(encodedQueryString, "UTF-8")
         println("Input queryString: $encodedQueryString")
-        println("Decoded queryString: $queryString")
-        return this.doSimpleSearch(queryString)
+        // println("Decoded queryString: $queryString")
+        return this.doSimpleSearch(encodedQueryString)
     }
 
     fun doStructureSearchBySmiles(smiles: String): List<UniqueNaturalProduct> {
@@ -60,12 +60,14 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
         }
     }
 
-    fun doSimpleSearch(query: String): List<UniqueNaturalProduct> {
+    fun doSimpleSearch(query: String): Map<String, Any> {
         // determine type of input on very basic principles without validation
         val regexMap: Map<String, Regex> = mapOf(
                 "inchi" to Regex("^InChI=.*$"),
                 "inchikey" to Regex("^[A-Z]{14}-[A-Z]{10}-[A-Z]$"),
+                "molecular_formula" to Regex(".+?"),
                 "smiles" to Regex("^[^Jj][A-Za-z0-9\\(\\)\\[\\]\\-=#$:\\+\\@\\.\\/\\>\\<]{3,}$")
+                // "molecular_weight" to Regex("^\\d+?[.,]?\\d+?$")
         )
 
         val hitsMap = mutableMapOf<String, Boolean>()
@@ -74,15 +76,27 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
             hitsMap[name] = regex.containsMatchIn(query)
         }
 
-        val naturalProducts: List<UniqueNaturalProduct>
-        // only search by smiles if no other formats match
-        when {
-            hitsMap["inchi"]!! -> naturalProducts = this.uniqueNaturalProductRepository.findByInchi(query)
-            hitsMap["inchikey"]!! -> naturalProducts = this.uniqueNaturalProductRepository.findByInchikey(query)
-            hitsMap["smiles"]!! -> naturalProducts = this.doStructureSearchBySmiles(query)
-            else -> naturalProducts = emptyList()
+        // only search by smiles if no other formats match; problem: smiles matches almost everything
+        val naturalProducts: List<UniqueNaturalProduct> = when {
+            hitsMap["inchi"]!! -> this.uniqueNaturalProductRepository.findByInchi(query)
+            hitsMap["inchikey"]!! -> this.uniqueNaturalProductRepository.findByInchikey(query)
+            hitsMap["molecular_formula"]!! -> this.uniqueNaturalProductRepository.findByMolecularFormula(query)
+            hitsMap["smiles"]!! -> this.doStructureSearchBySmiles(query)
+            else -> emptyList()
         }
 
-        return naturalProducts
+        val determinedInputType: String = when {
+            hitsMap["inchi"]!! -> "InChI"
+            hitsMap["inchikey"]!! -> "InChIkey"
+            hitsMap["molecular_formula"]!! -> "molecular formula"
+            hitsMap["smiles"]!! -> "Smiles"
+            else -> ""
+        }
+
+        return mapOf(
+            "originalQuery" to query,
+            "determinedInputType" to determinedInputType,
+            "naturalProducts" to naturalProducts
+        )
     }
 }

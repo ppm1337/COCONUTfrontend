@@ -5,6 +5,8 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {LinkContainer} from "react-router-bootstrap";
+import {Redirect, Route, Switch} from "react-router-dom";
+import SearchResult from "./SearchResult";
 
 const React = require("react");
 const restClient = require("./restClient");
@@ -22,28 +24,25 @@ export default class HeaderSearchBar extends React.Component {
         this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     }
 
-    handleSearchSubmit() {
+    handleSearchSubmit(e) {
+        e.preventDefault();
+
         this.setState({
             searchSubmitted: true
         });
 
-        let searchButtonIcon = document.getElementById("searchButtonIcon");
-        searchButtonIcon.setAttribute("icon", "spinner");
-        searchButtonIcon.setAttribute("spin", "");
-
-        this.doSearch(document.getElementById("searchInput").value);
+        this.fetchSearchResults(document.getElementById("searchInput").value);
     }
 
-    doSearch(queryString) {
+    fetchSearchResults(queryString) {
         restClient({
             method: "GET",
             path: "/api/search/simple?query=" + encodeURIComponent(queryString)
         }).then(
             (response) => {
-                console.log("the search was triggered and received a response...", response);
                 this.setState({
                     searchIsLoaded: true,
-                    searchResult: response.entity._embedded.naturalProducts
+                    searchResult: response
                 });
             },
             (error) => {
@@ -60,10 +59,12 @@ export default class HeaderSearchBar extends React.Component {
                 <Col>
                     <Form.Label><small>Find natural products</small></Form.Label>
                     <InputGroup>
-                        <Form.Control id="searchInput" type="text" placeholder="Smiles, Inchi or Inchikey"/>
+                        <Form.Control id="searchInput" type="text" placeholder="Smiles, Inchi, Inchikey, formula"/>
                         <InputGroup.Append>
                             <Button id="searchButton" variant="primary" type="submit" onClick={this.handleSearchSubmit}>
-                                <FontAwesomeIcon id="searchButtonIcon" icon="search" fixedWidth/>
+                                {this.state.searchSubmitted ?
+                                    <FontAwesomeIcon id="searchButtonIcon" icon="spinner" fixedWidth spin/> :
+                                    <FontAwesomeIcon id="searchButtonIcon" icon="search" fixedWidth/>}
                                 &nbsp;Search
                             </Button>
                         </InputGroup.Append>
@@ -78,6 +79,10 @@ export default class HeaderSearchBar extends React.Component {
                         </LinkContainer>
                     </Form.Text>
                 </Col>
+                {this.state.searchIsLoaded &&
+                <Switch>
+                    <Route path="/search_result" render={(props) => <SearchResult {...props} result={this.state.searchResult}/>}/>
+                </Switch>}
             </Row>
         );
     }
