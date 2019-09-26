@@ -11,7 +11,6 @@ import BrowserViewPills from "./BrowserViewPills";
 import Spinner from "./Spinner";
 import Error from "./Error";
 import Pagination from "react-bootstrap/Pagination";
-import BrowserPagination from "./BrowserPagination";
 
 const React = require("react");
 const restClient = require("./restClient");
@@ -23,9 +22,17 @@ export default class Browser extends React.Component {
         this.state = {
             currentPage: 0
         };
+        this.handlePageRequestEvent = this.handlePageRequestEvent.bind(this);
     }
 
-    withSubscription(ViewComponent, pageNumber) {
+    handlePageRequestEvent(e, targetPageNumber) {
+        e.preventDefault();
+        this.setState({
+            currentPage: targetPageNumber
+        });
+    }
+
+    withSubscription(ViewComponent, pageNumber, pageRequestHandler) {
         return class extends React.Component {
             constructor(props) {
                 super(props);
@@ -81,13 +88,32 @@ export default class Browser extends React.Component {
                 } else if (!isLoaded) {
                     return <Spinner/>
                 } else {
-                    const displayPageNumber = pageNumber + 1;
+                    /*
+                    note: the api starts counting pages at 0
+                    pageNumber refers to the page that should be fetched from the api
+                    displayPageNumber is the number shown in the UI
+                    */
+                    const pageNumberFirst = 0;
+                    const displayPageNumberFirst = pageNumberFirst + 1;
+
+                    const pageNumberLast = this.state.stats.totalPageCount - 1;
+                    const displayPageNumberLast = this.state.stats.totalPageCount;
+
+                    const pageNumberPrev = pageNumber - 1;
+                    const pageNumberNext = pageNumber + 1;
+
+                    let paginationItems = [];
+                    for (let i = 0; i < 10; i++) {
+                        paginationItems.push(
+                            <Pagination.Item key={pageNumberFirst + i} onClick={(e) => pageRequestHandler(e, pageNumberFirst + i)} active={pageNumberFirst + i === pageNumber}>
+                                {displayPageNumberFirst + i}
+                            </Pagination.Item>);
+                    }
+                    paginationItems.push(<Pagination.Ellipsis key="ellipsis_0" disabled/>);
+                    paginationItems.push(<Pagination.Item key={pageNumberLast} onClick={(e) => pageRequestHandler(e, pageNumberLast)} active={pageNumberLast === pageNumber}>{displayPageNumberLast}</Pagination.Item>);
 
                     return (
                         <Container>
-                            <Row>
-                                <h2>Component Browser</h2>
-                            </Row>
                             <br/>
                             <Row>
                                 <BrowserFilter/>
@@ -102,15 +128,17 @@ export default class Browser extends React.Component {
                             </Row>
                             <Row>
                                 <Pagination>
-                                    <Pagination.First />
-                                    <Pagination.Prev />
-                                    <Pagination.Item>{displayPageNumber}</Pagination.Item>
-                                    <Pagination.Item>{displayPageNumber + 1}</Pagination.Item>
-                                    <Pagination.Item>{displayPageNumber + 2}</Pagination.Item>
-                                    <Pagination.Ellipsis/>
-                                    <Pagination.Item>{this.state.stats.totalPageCount}</Pagination.Item>
-                                    <Pagination.Next />
-                                    <Pagination.Last />
+                                    <Pagination.First onClick={(e) => pageRequestHandler(e, pageNumberFirst)}/>
+                                    {pageNumberPrev >= pageNumberFirst &&
+                                        <Pagination.Prev onClick={(e) => pageRequestHandler(e, pageNumberPrev)}/>
+                                    }
+
+                                    {paginationItems}
+
+                                    {pageNumberNext <= pageNumberLast &&
+                                        <Pagination.Next onClick={(e) => pageRequestHandler(e, pageNumberNext)}/>
+                                    }
+                                    <Pagination.Last onClick={(e) => pageRequestHandler(e, pageNumberLast)}/>
                                 </Pagination>
                             </Row>
                             <br/>
@@ -125,8 +153,8 @@ export default class Browser extends React.Component {
     }
 
     render() {
-        const CardBrowserWithSubscription = this.withSubscription(CardBrowser, this.state.currentPage);
-        const TableBrowserWithSubscription = this.withSubscription(TableBrowser, this.state.currentPage);
+        const CardBrowserWithSubscription = this.withSubscription(CardBrowser, this.state.currentPage, this.handlePageRequestEvent);
+        const TableBrowserWithSubscription = this.withSubscription(TableBrowser, this.state.currentPage, this.handlePageRequestEvent);
 
         return (
             <Switch>
