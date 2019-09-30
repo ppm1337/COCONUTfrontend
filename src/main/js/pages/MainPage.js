@@ -34,16 +34,19 @@ class MainPage extends React.Component {
 				<React.Fragment>
 					<Header />
 					<Container fluid className="content">
-						<Switch>
-							<Route exact path="/" component={Index}/>
-							<Route path="/about" component={About}/>
-							<Route path="/browser*" component={Browser}/>
-							<Route path="/compound/:identifier(smiles|inchi|inchikey)/:identifierValue" component={NaturalProductCompoundCard}/>
-							<Route path="/download" component={Download}/>
-							<Route path="/search/structure" component={StructureSearch}/>
-							<Route path="/search/advanced" component={AdvancedSearch}/>
-							<Route component={NotFound} />
-						</Switch>
+						<div id="contentContainer">
+							<Switch>
+								<Route exact path="/" component={Index}/>
+								<Route path="/about" component={About}/>
+								<Route path="/browser*" component={Browser}/>
+								<Route path="/compound/:identifier(smiles|inchi|inchikey)/:identifierValue" component={NaturalProductCompoundCard}/>
+								<Route path="/download" component={Download}/>
+								<Route path="/search/advanced" component={AdvancedSearch}/>
+								<Route path="/search/simple/:q" component={SearchResult}/>
+								<Route path="/search/structure" component={StructureSearch}/>
+								<Route component={NotFound}/>
+							</Switch>
+						</div>
 					</Container>
 				</React.Fragment>
 			</BrowserRouter>

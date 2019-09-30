@@ -87,9 +87,9 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
 
         val determinedInputType: String = when {
             hitsMap["inchi"]!! -> "InChI"
-            hitsMap["inchikey"]!! -> "InChIkey"
+            hitsMap["inchikey"]!! -> "InChIKey"
             hitsMap["molecular_formula"]!! -> "molecular formula"
-            hitsMap["smiles"]!! -> "Smiles"
+            hitsMap["smiles"]!! -> "SMILES"
             else -> ""
         }
 

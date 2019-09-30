@@ -10,6 +10,7 @@ class HtmlController {
             "/*",
             "/browser/*",
             "/search/*",
+            "/search/simple/*",
             "/compound/{identifier:smiles|inchi|inchikey}/{identifierValue}")
     fun index(): String {
         return "index"

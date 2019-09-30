@@ -5,21 +5,17 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {LinkContainer} from "react-router-bootstrap";
-import {Redirect, Route, Switch} from "react-router-dom";
-import SearchResult from "./SearchResult";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 
 const React = require("react");
-const restClient = require("../restClient");
 
 
 export default class HeaderSearchBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchError: null,
-            searchIsLoaded: false,
-            searchResult: [],
-            searchSubmitted: false
+            searchSubmitted: false,
+            queryString: null
         };
         this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     }
@@ -28,29 +24,9 @@ export default class HeaderSearchBar extends React.Component {
         e.preventDefault();
 
         this.setState({
-            searchSubmitted: true
+            searchSubmitted: true,
+            queryString: document.getElementById("searchInput").value
         });
-
-        this.fetchSearchResults(document.getElementById("searchInput").value);
-    }
-
-    fetchSearchResults(queryString) {
-        restClient({
-            method: "GET",
-            path: "/api/search/simple?query=" + encodeURIComponent(queryString)
-        }).then(
-            (response) => {
-                this.setState({
-                    searchIsLoaded: true,
-                    searchResult: response
-                });
-            },
-            (error) => {
-                this.setState({
-                    searchIsLoaded: true,
-                    searchError: error
-                });
-            });
     }
 
     render() {
@@ -79,10 +55,7 @@ export default class HeaderSearchBar extends React.Component {
                         </LinkContainer>
                     </Form.Text>
                 </Col>
-                {this.state.searchIsLoaded &&
-                <Switch>
-                    <Route path="/search_result" render={(props) => <SearchResult {...props} result={this.state.searchResult}/>}/>
-                </Switch>}
+                {this.state.searchSubmitted && <Redirect to={"/search/simple/" + this.state.queryString}/>}
             </Row>
         );
     }
