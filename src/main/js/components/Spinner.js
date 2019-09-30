@@ -15,7 +15,7 @@ export default class Spinner extends React.Component {
         return(
             <Container>
                 <Row className="justify-content-center">
-                    <FontAwesomeIcon icon="spinner" size={this.size} spin/>
+                    <FontAwesomeIcon icon="spinner" className="standAloneIcon" size={this.size} spin/>
                 </Row>
             </Container>
         );

@@ -125,7 +125,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                         <br />
                                         <Row>
                                             <Col sm={4}>
-                                                <Image src={canvas.toDataURL()} alt={<FontAwesomeIcon icon="file-image" size="3x"/>} fluid/>
+                                                <Image src={canvas.toDataURL()} alt={<FontAwesomeIcon icon="file-image" className="standAloneIcon" size="3x"/>} fluid/>
                                             </Col>
                                             <Col sm={8}>
                                                 <Table size="sm">

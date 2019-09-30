@@ -15,7 +15,7 @@ $theme-colors: (
 $enable-rounded: false;
 $enable-shadows: true;
 
-$coconut-box-shadow: 0 .2rem .5rem 0 rgba(60, 60, 60, .15) !important;
+$coconut-box-shadow: 0 .2rem .5rem 0 rgba(0, 0, 0, .15) !important;
 $coconut-header-height: 215px;
 
 /* bootstrap and its default variables */
@@ -112,4 +112,8 @@ h {
 
 .cardItemHeadline {
   font-size: smaller;
+}
+
+.standAloneIcon {
+  color: map_get($theme-colors, "primary");
 }

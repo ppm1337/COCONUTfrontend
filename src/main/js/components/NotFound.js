@@ -24,8 +24,8 @@ export default class NotFound extends React.Component {
                 <LinkContainer to="/">
                     <Row className="justify-content-center">
                         <a>
-                            <FontAwesomeIcon icon="arrow-right" fixedWidth size="2x"/>
-                            <FontAwesomeIcon icon="home" fixedWidth size="2x"/>
+                            <FontAwesomeIcon icon="arrow-right" className="standAloneIcon" fixedWidth size="2x"/>
+                            <FontAwesomeIcon icon="home" className="standAloneIcon" fixedWidth size="2x"/>
                             Go back to the index
                         </a>
                     </Row>

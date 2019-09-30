@@ -11,7 +11,7 @@ export default class AdvancedSearch extends React.Component {
                     <h2>Advanced Search</h2>
                 </Row>
                 <Row>
-                    <p>yet to come...</p>
+                    <p>Nothing to see here at the moment...</p>
                 </Row>
             </Container>
         );
