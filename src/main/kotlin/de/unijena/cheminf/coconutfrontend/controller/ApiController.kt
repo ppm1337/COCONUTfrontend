@@ -65,7 +65,7 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
         val regexMap: Map<String, Regex> = mapOf(
                 "inchi" to Regex("^InChI=.*$"),
                 "inchikey" to Regex("^[A-Z]{14}-[A-Z]{10}-[A-Z]$"),
-                "molecular_formula" to Regex(".+?"),
+                "molecular_formula" to Regex("C[0-9]+?H[0-9].+"),
                 "smiles" to Regex("^[^Jj][A-Za-z0-9\\(\\)\\[\\]\\-=#$:\\+\\@\\.\\/\\>\\<]{3,}$")
                 // "molecular_weight" to Regex("^\\d+?[.,]?\\d+?$")
         )
