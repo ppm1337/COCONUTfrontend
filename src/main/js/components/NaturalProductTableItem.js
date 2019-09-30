@@ -23,9 +23,10 @@ export default class NaturalProductTableItem extends React.Component {
             <LinkContainer to={linkToCompoundPage}>
                 <tr>
                     <td><Image src={canvas.toDataURL()} alt="🥥" fluid/></td>
-                    <td></td>
+                    <td>{this.props.naturalProduct.name ? this.props.naturalProduct.name : "no name available"}</td>
                     <td>{this.props.naturalProduct.npl_score}</td>
-                    <td>{this.props.naturalProduct.molecular_formula}</td>
+                    <td>{this.props.naturalProduct.molecular_formula || this.props.naturalProduct.molecularFormula}</td>
+                    <td>{this.props.naturalProduct.molecular_weight || this.props.naturalProduct.molecularWeight}</td>
                     <td>{this.props.naturalProduct.inchi}</td>
                     <td>{this.props.naturalProduct.inchikey}</td>
                 </tr>

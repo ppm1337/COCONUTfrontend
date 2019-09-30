@@ -105,3 +105,11 @@ h {
   border: thin solid map_get($theme-colors, "primary");
   box-shadow: $coconut-box-shadow
 }
+
+.tableThumbnail {
+  min-width: 200px;
+}
+
+.cardItemHeadline {
+  font-size: smaller;
+}

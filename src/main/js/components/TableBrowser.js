@@ -14,12 +14,13 @@ export default class TableBrowser extends React.Component {
             <Table responsive="lg" bordered hover size="sm">
                 <thead>
                 <tr>
-                    <th>Molecule</th>
+                    <th className="tableThumbnail"></th>
                     <th>Name</th>
-                    <th>NPlikeness Score</th>
-                    <th>Formula</th>
-                    <th>Inchi</th>
-                    <th>Inchikey</th>
+                    <th>NPL score</th>
+                    <th>Mol. formula</th>
+                    <th>Mol. weight</th>
+                    <th>InChI</th>
+                    <th>InChIKey</th>
                 </tr>
                 </thead>
                 <tbody>

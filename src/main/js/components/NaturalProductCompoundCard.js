@@ -73,14 +73,18 @@ export default class NaturalProductCompoundCard extends React.Component {
                 console.log(e.name + " in OpenChemLib: " + e.message);
             }
 
+            let bcutDescriptorCount = 0;
             const bcutDescriptor = naturalProduct.bcutDescriptor.map((item, index) => {
-                <tr key={index}>{item}</tr>
+                <tr key={index}>
+                    <td>{item}</td>
+                </tr>
+                bcutDescriptorCount++;
             });
 
             return (
                 <Container>
                     <Row>
-                        <Col sm={2}>
+                        <Col sm={3}>
                             <Nav className="flex-column" id="compoundCardSidebar">
                                 <HashRouter hashType="noslash">
                                     <LinkContainer to="overview">
@@ -93,19 +97,31 @@ export default class NaturalProductCompoundCard extends React.Component {
                                         <Nav.Link className="text-primary">Natural Product Likeness</Nav.Link>
                                     </LinkContainer>
                                     <LinkContainer to="molecular_properties">
-                                        <Nav.Link className="text-primary">Molecular properties</Nav.Link>
+                                        <Nav.Link className="text-primary">Molecular Properties</Nav.Link>
                                     </LinkContainer>
                                     <LinkContainer to="computed_properties">
-                                        <Nav.Link className="text-primary">Computed properties</Nav.Link>
+                                        <Nav.Link className="text-primary">Computed Properties</Nav.Link>
+                                    </LinkContainer>
+                                    <LinkContainer to="sources">
+                                        <Nav.Link className="text-primary">Sources</Nav.Link>
+                                    </LinkContainer>
+                                    <LinkContainer to="species">
+                                        <Nav.Link className="text-primary">Species</Nav.Link>
+                                    </LinkContainer>
+                                    <LinkContainer to="synonyms">
+                                        <Nav.Link className="text-primary">Synonyms</Nav.Link>
+                                    </LinkContainer>
+                                    <LinkContainer to="citations">
+                                        <Nav.Link className="text-primary">Citations</Nav.Link>
                                     </LinkContainer>
                                 </HashRouter>
                             </Nav>
                         </Col>
-                        <Col sm={10}>
+                        <Col sm={9}>
                             <Row id="overview">
                                 <Card className="compoundCardItem">
                                     <Card.Body>
-                                        <Card.Title className="text-primary">Name goes here</Card.Title>
+                                        <Card.Title className="text-primary">{naturalProduct.inchikey}</Card.Title>
                                         <br />
                                         <Row>
                                             <Col sm={4}>
@@ -115,24 +131,20 @@ export default class NaturalProductCompoundCard extends React.Component {
                                                 <Table size="sm">
                                                     <tbody>
                                                     <tr>
-                                                        <td>COCONUT-ID</td>
-                                                        <td>{naturalProduct.id}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Inchikey</td>
-                                                        <td>{naturalProduct.inchikey}</td>
+                                                        <td>Name</td>
+                                                        <td>{naturalProduct.name ? naturalProduct.name : "no name available"}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Contains sugar</td>
-                                                        <td>{naturalProduct.contains_sugar}</td>
+                                                        <td>{naturalProduct.contains_sugar ? "yes" : "no"}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Mol. formula</td>
-                                                        <td>{naturalProduct.molecular_formula}</td>
+                                                        <td>{naturalProduct.molecular_formula || naturalProduct.molecularFormula}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Mol. weight</td>
-                                                        <td>{naturalProduct.molecular_weight}</td>
+                                                        <td>{naturalProduct.molecular_weight || naturalProduct.molecularWeight}</td>
                                                     </tr>
                                                     </tbody>
                                                 </Table>
@@ -150,24 +162,24 @@ export default class NaturalProductCompoundCard extends React.Component {
                                         <Table size="sm">
                                             <tbody>
                                             <tr>
-                                                <td>Inichi</td>
+                                                <td>InChI</td>
                                                 <td>{naturalProduct.inchi}</td>
                                             </tr>
                                             <tr>
-                                                <td>Inchikey</td>
+                                                <td>InChIKey</td>
                                                 <td>{naturalProduct.inchikey}</td>
                                             </tr>
                                             <tr>
-                                                <td>Smiles</td>
+                                                <td>SMILES</td>
                                                 <td>{naturalProduct.smiles}</td>
                                             </tr>
                                             <tr>
-                                                <td>Clean Smiles</td>
+                                                <td>Canonical SMILES</td>
                                                 <td>{naturalProduct.clean_smiles}</td>
                                             </tr>
                                             <tr>
-                                                <td>Mol. Formula</td>
-                                                <td>{naturalProduct.molecular_formula}</td>
+                                                <td>Mol. formula</td>
+                                                <td>{naturalProduct.molecular_formula || naturalProduct.molecularFormula}</td>
                                             </tr>
                                             </tbody>
                                         </Table>
@@ -183,15 +195,15 @@ export default class NaturalProductCompoundCard extends React.Component {
                                         <Table size="sm">
                                             <tbody>
                                             <tr>
-                                                <td>NPL NOH Score</td>
+                                                <td>NPL NOH score</td>
                                                 <td>{naturalProduct.npl_noh_score}</td>
                                             </tr>
                                             <tr>
-                                                <td>NPL Score</td>
+                                                <td>NPL score</td>
                                                 <td>{naturalProduct.npl_score}</td>
                                             </tr>
                                             <tr>
-                                                <td>NPL Sugar Score</td>
+                                                <td>NPL sugar score</td>
                                                 <td>{naturalProduct.npl_sugar_score}</td>
                                             </tr>
                                             </tbody>
@@ -203,7 +215,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                             <Row id="molecular_properties">
                                 <Card className="compoundCardItem">
                                     <Card.Body>
-                                        <Card.Title className="text-primary">Molecular properties</Card.Title>
+                                        <Card.Title className="text-primary">Molecular Properties</Card.Title>
                                         <br />
                                         <Table size="sm">
                                             <tbody>
@@ -256,7 +268,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                             <Row id="computed_properties">
                                 <Card className="compoundCardItem">
                                     <Card.Body>
-                                        <Card.Title className="text-primary">Computed properties</Card.Title>
+                                        <Card.Title className="text-primary">Computed Properties</Card.Title>
                                         <br />
                                         <Table size="sm">
                                             <tbody>
@@ -351,7 +363,59 @@ export default class NaturalProductCompoundCard extends React.Component {
                                     </Card.Body>
                                 </Card>
                             </Row>
-                            <br />
+                            <br/>
+                            <Row id="sources">
+                                <Card className="compoundCardItem">
+                                    <Card.Body>
+                                        <Card.Title className="text-primary">Sources</Card.Title>
+                                        <br />
+                                        <Table size="sm">
+                                            <tbody>
+                                            </tbody>
+                                        </Table>
+                                    </Card.Body>
+                                </Card>
+                            </Row>
+                            <br/>
+                            <Row id="species">
+                                <Card className="compoundCardItem">
+                                    <Card.Body>
+                                        <Card.Title className="text-primary">Species</Card.Title>
+                                        <br />
+                                        <Table size="sm">
+                                            <tbody>
+                                            </tbody>
+                                        </Table>
+                                    </Card.Body>
+                                </Card>
+                            </Row>
+                            <br/>
+                            <Row id="synonyms">
+                                <Card className="compoundCardItem">
+                                    <Card.Body>
+                                        <Card.Title className="text-primary">Synonyms</Card.Title>
+                                        <br />
+                                        <Table size="sm">
+                                            <tbody>
+                                            </tbody>
+                                        </Table>
+                                    </Card.Body>
+                                </Card>
+                            </Row>
+                            <br/>
+                            <Row id="citations">
+                                <Card className="compoundCardItem">
+                                    <Card.Body>
+                                        <Card.Title className="text-primary">Citations</Card.Title>
+                                        <br />
+                                        <Table size="sm">
+                                            <tbody>
+                                            </tbody>
+                                        </Table>
+                                    </Card.Body>
+                                </Card>
+                            </Row>
+                            <br/>
                         </Col>
                     </Row>
                 </Container>
