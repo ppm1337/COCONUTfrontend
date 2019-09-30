@@ -9,7 +9,7 @@ import {Redirect, Route, Switch} from "react-router-dom";
 import SearchResult from "./SearchResult";
 
 const React = require("react");
-const restClient = require("./restClient");
+const restClient = require("../restClient");
 
 
 export default class HeaderSearchBar extends React.Component {

@@ -9,7 +9,7 @@ import Spinner from "./Spinner";
 
 const React = require("react");
 const OpenChemLib = require("openchemlib/full");
-const restClient = require("./restClient");
+const restClient = require("../restClient");
 
 export default class StructureSearch extends React.Component {
     constructor(props) {

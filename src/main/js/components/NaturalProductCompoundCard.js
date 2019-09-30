@@ -12,10 +12,10 @@ import Card from "react-bootstrap/Card";
 import {HashRouter} from "react-router-dom";
 import Spinner from "./Spinner";
 import Error from "./Error";
+import Utils from "../Utils";
 
 const React = require("react");
-const OpenChemLib = require("openchemlib/full");
-const restClient = require("./restClient");
+const restClient = require("../restClient");
 
 
 export default class NaturalProductCompoundCard extends React.Component {
@@ -62,16 +62,7 @@ export default class NaturalProductCompoundCard extends React.Component {
         } else if (!isLoaded) {
             return <Spinner/>;
         } else {
-            let canvas = document.createElement("canvas");
-            canvas.width = 400;
-            canvas.height = 300;
-
-            try {
-                const npMolecule = OpenChemLib.Molecule.fromSmiles(naturalProduct.smiles);
-                OpenChemLib.StructureView.drawMolecule(canvas, npMolecule);
-            } catch(e) {
-                console.log(e.name + " in OpenChemLib: " + e.message);
-            }
+            const structure = Utils.drawMoleculeBySmiles(naturalProduct.smiles);
 
             let bcutDescriptorCount = 0;
             const bcutDescriptor = naturalProduct.bcutDescriptor.map((item, index) => {
@@ -125,7 +116,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                         <br />
                                         <Row>
                                             <Col sm={4}>
-                                                <Image src={canvas.toDataURL()} alt={<FontAwesomeIcon icon="file-image" className="standAloneIcon" size="3x"/>} fluid/>
+                                                <Image src={structure.toDataURL()} alt={<FontAwesomeIcon icon="file-image" className="standAloneIcon" size="3x"/>} fluid/>
                                             </Col>
                                             <Col sm={8}>
                                                 <Table size="sm">

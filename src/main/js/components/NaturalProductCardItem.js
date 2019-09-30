@@ -1,26 +1,18 @@
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
+import Utils from "../Utils";
 
-const OpenChemLib = require("openchemlib/full");
 const React = require("react");
+
 
 export default class NaturalProductCardItem extends React.Component {
     render() {
         const linkToCompoundPage = "/compound/inchikey/" + this.props.naturalProduct.inchikey;
-        let canvas = document.createElement("canvas");
-        canvas.width = 280;
-        canvas.height = 200;
-
-        try {
-            const npMolecule = OpenChemLib.Molecule.fromSmiles(this.props.naturalProduct.smiles);
-            OpenChemLib.StructureView.drawMolecule(canvas, npMolecule);
-        } catch(e) {
-            console.log(e.name + " in OpenChemLib: " + e.message);
-        }
+        const structure = Utils.drawMoleculeBySmiles(this.props.naturalProduct.smiles);
 
         return (
             <Card className="cardBrowserItem">
-                <Card.Img variant="top" src={canvas.toDataURL()} alt="🥥"/>
+                <Card.Img variant="top" src={structure.toDataURL()} alt="🥥"/>
                 <Card.Body>
                     <Card.Title>
                         <Card.Link href={linkToCompoundPage} className="cardItemHeadline">{this.props.naturalProduct.inchikey}</Card.Link>

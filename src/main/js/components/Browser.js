@@ -13,7 +13,7 @@ import Error from "./Error";
 import Pagination from "react-bootstrap/Pagination";
 
 const React = require("react");
-const restClient = require("./restClient");
+const restClient = require("../restClient");
 
 
 export default class Browser extends React.Component {
