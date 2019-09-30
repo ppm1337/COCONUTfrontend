@@ -1,6 +1,4 @@
 import Container from "react-bootstrap/Container";
-import Introduction from "./Introduction";
-import Browser from "./Browser";
 import CardBrowser from "./CardBrowser";
 import Row from "react-bootstrap/Row";
 import Error from "./Error";
@@ -8,6 +6,7 @@ import Spinner from "./Spinner";
 
 const React = require("react");
 const restClient = require("../restClient");
+
 
 export default class SearchResult extends React.Component {
     constructor(props) {
@@ -59,12 +58,12 @@ export default class SearchResult extends React.Component {
                     </Row>
                     <br/>
                     <Row>
-                        <p>Your search yielded {resultCount} natural product{resultCount > 1 ? "s" : null} under the
+                        {searchIsLoaded && <p>Your search yielded {resultCount} natural product{resultCount > 1 ? "s" : null} under the
                             assumption of the entered sequence "{searchResult.originalQuery}" being of
-                            type {searchResult.determinedInputType}.</p>
+                            type {searchResult.determinedInputType}.</p>}
                     </Row>
                     <br/>
-                    <CardBrowser naturalProducts={searchResult.naturalProducts}/>
+                    {searchResult && <CardBrowser naturalProducts={searchResult.naturalProducts}/>}
                 </Container>
             );
         }

@@ -12,7 +12,6 @@ import org.openscience.cdk.smiles.SmilesParser
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.net.URLDecoder
 
 @RestController
 @RequestMapping("/api")
@@ -30,9 +29,9 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
 
     @RequestMapping("/search/structure")
     fun structureSearchBySmiles(@RequestParam("smiles") encodedSmiles: String): List<UniqueNaturalProduct> {
-        val smiles = URLDecoder.decode(encodedSmiles, "UTF-8")
+        // val smiles = URLDecoder.decode(encodedSmiles, "UTF-8")
 
-        return this.doStructureSearchBySmiles(smiles)
+        return this.doStructureSearchBySmiles(encodedSmiles)
     }
 
     @RequestMapping("/search/simple")

@@ -5,7 +5,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {LinkContainer} from "react-router-bootstrap";
-import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 const React = require("react");
 
@@ -35,7 +35,7 @@ export default class HeaderSearchBar extends React.Component {
                 <Col>
                     <Form.Label><small>Find natural products</small></Form.Label>
                     <InputGroup>
-                        <Form.Control id="searchInput" type="text" placeholder="Smiles, Inchi, Inchikey, formula"/>
+                        <Form.Control id="searchInput" type="text" placeholder="SMILES, InChI, InChIKey, formula"/>
                         <InputGroup.Append>
                             <Button id="searchButton" variant="primary" type="submit" onClick={this.handleSearchSubmit}>
                                 {this.state.searchSubmitted ?

@@ -3,13 +3,15 @@ import Row from "react-bootstrap/Row";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import SearchResult from "./SearchResult";
 import Col from "react-bootstrap/Col";
 import Spinner from "./Spinner";
+import CardBrowser from "./CardBrowser";
+import Error from "./Error";
 
 const React = require("react");
 const OpenChemLib = require("openchemlib/full");
 const restClient = require("../restClient");
+
 
 export default class StructureSearch extends React.Component {
     constructor(props) {
@@ -19,7 +21,7 @@ export default class StructureSearch extends React.Component {
             ajaxIsLoaded: false,
             ajaxResult: [],
             searchSubmitted: false,
-            searchSmiles: ""
+            searchSmiles: null
         };
         this.handleDesireForCoffee = this.handleDesireForCoffee.bind(this);
         this.handleStructureSubmit = this.handleStructureSubmit.bind(this);
@@ -52,7 +54,7 @@ export default class StructureSearch extends React.Component {
     doSearchBySmiles(smiles) {
         restClient({
             method: "GET",
-            path: "/api/search/structure?smiles=" + encodeURIComponent(smiles)
+            path: "/api/search/structure?smiles=" + smiles // encodeURIComponent(smiles)
         }).then(
             (response) => {
                 this.setState({
@@ -75,23 +77,25 @@ export default class StructureSearch extends React.Component {
 
         if (searchSubmitted) {
             smilesInfo = (
-                <Form.Group as={Row} controlId="formPlaintextEmail">
+                <Form.Group as={Row}>
                     <Form.Label column sm="2">
                         Smiles:
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control type="text" readOnly placeholder={searchSmiles} />
+                        <Form.Control type="text" placeholder={searchSmiles} />
                     </Col>
                 </Form.Group>
             );
 
-            if (!ajaxIsLoaded) {
+            if (ajaxError) {
+                resultRow = <Error/>;
+            } else if (!ajaxIsLoaded) {
                 resultRow = <Row className="justify-content-center"><Spinner/></Row>;
             } else {
                 if (ajaxResult.length > 0) {
-                    resultRow = <SearchResult naturalProducts={ajaxResult}/>;
+                    resultRow = <CardBrowser naturalProducts={ajaxResult}/>;
                 } else {
-                    resultRow = <p>There are no results that exactly match your structure.</p>
+                    resultRow = <Row><p>There are no results that exactly match your structure.</p></Row>;
                 }
             }
         }
