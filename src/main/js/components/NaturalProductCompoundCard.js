@@ -312,7 +312,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                                         Sum of the atomic polarizabilities (including implicit hydrogens).
                                                     </Tooltip>
                                                 }>
-                                                    <td>Apol</td>
+                                                    <td>Apol <FontAwesomeIcon icon="question-circle" fixedWidth/></td>
                                                 </OverlayTrigger>
                                                 <td>{naturalProduct.apol}</td>
                                             </tr>
@@ -322,7 +322,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                                         Sum of the absolute value of the difference between atomic polarizabilities of all bonded atoms in the molecule (including implicit hydrogens) with polarizabilities taken from http://www.sunysccc.edu/academic/mst/ptable/p-table2.htm This descriptor assumes 2-centered bonds.
                                                     </Tooltip>
                                                 }>
-                                                    <td>Bpol</td>
+                                                    <td>Bpol <FontAwesomeIcon icon="question-circle" fixedWidth/></td>
                                                 </OverlayTrigger>
                                                 <td>{naturalProduct.bpol}</td>
                                             </tr>
@@ -332,7 +332,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                                         A topological descriptor combining distance and adjacency information.
                                                     </Tooltip>
                                                 }>
-                                                    <td>Eccentric Connectivity Index Descriptor</td>
+                                                    <td>Eccentric Connectivity Index Descriptor <FontAwesomeIcon icon="question-circle" fixedWidth/></td>
                                                 </OverlayTrigger>
                                                 <td>{naturalProduct.eccentricConnectivityIndexDescriptor}</td>
                                             </tr>
@@ -342,7 +342,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                                         FMF descriptor characterizing complexity of a molecule. The descriptor is described in (Yang, Y. et. al.. J. Med. Chem.. 2010. ASAP) and is an approach to characterizing molecular complexity based on the Murcko framework present in the molecule.
                                                     </Tooltip>
                                                 }>
-                                                    <td>FMF Descriptor</td>
+                                                    <td>FMF Descriptor <FontAwesomeIcon icon="question-circle" fixedWidth/></td>
                                                 </OverlayTrigger>
                                                 <td>{naturalProduct.fmfDescriptor}</td>
                                             </tr>
@@ -352,7 +352,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                                         Eigenvalue based descriptor noted for its utility in chemical diversity.
                                                     </Tooltip>
                                                 }>
-                                                    <td>BCUT Descriptor</td>
+                                                    <td>BCUT Descriptor <FontAwesomeIcon icon="question-circle" fixedWidth/></td>
                                                 </OverlayTrigger>
                                                 <td>
                                                     <ul className="list-unstyled">
@@ -366,7 +366,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                                         This descriptor is characterizing non-flatness of a molecule.
                                                     </Tooltip>
                                                 }>
-                                                    <td>FSP3 Descriptor</td>
+                                                    <td>FSP3 Descriptor <FontAwesomeIcon icon="question-circle" fixedWidth/></td>
                                                 </OverlayTrigger>
                                                 <td>{naturalProduct.fsp3}</td>
                                             </tr>
@@ -376,7 +376,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                                         Class that returns the complexity of a system. The complexity is defined as (Nilakantan, R. et. al.. Journal of chemical information and modeling. 2006. 46)
                                                     </Tooltip>
                                                 }>
-                                                    <td>Fragment Complexity Descriptor</td>
+                                                    <td>Fragment Complexity Descriptor <FontAwesomeIcon icon="question-circle" fixedWidth/></td>
                                                 </OverlayTrigger>
                                                 <td>{naturalProduct.fragmentComplexityDescriptor}</td>
                                             </tr>
