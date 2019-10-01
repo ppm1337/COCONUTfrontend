@@ -75,7 +75,7 @@ export default class NaturalProductCompoundCard extends React.Component {
 
             const bcutDescriptor = [];
             naturalProduct.bcutDescriptor.map((item, index) => {
-                bcutDescriptor.push(<td key={index}>{item}</td>);
+                bcutDescriptor.push(<li key={index}>{item}</li>);
             });
 
             const fragments = [];
@@ -354,7 +354,11 @@ export default class NaturalProductCompoundCard extends React.Component {
                                                 }>
                                                     <td>BCUT Descriptor</td>
                                                 </OverlayTrigger>
-                                                {bcutDescriptor}
+                                                <td>
+                                                    <ul className="list-unstyled">
+                                                        {bcutDescriptor}
+                                                    </ul>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <OverlayTrigger key="fsp3Overlay" placement="top" overlay={
