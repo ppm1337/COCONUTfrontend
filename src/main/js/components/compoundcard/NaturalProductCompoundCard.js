@@ -6,18 +6,18 @@ import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Table from "react-bootstrap/Table";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {LinkContainer} from "react-router-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Card from "react-bootstrap/Card";
-import {HashRouter} from "react-router-dom";
-import Spinner from "./Spinner";
-import Error from "./Error";
-import Utils from "../Utils";
+import Spinner from "../Spinner";
+import Error from "../Error";
+import Utils from "../../Utils";
 import Button from "react-bootstrap/Button";
+import Fragments from "./Fragments";
+import NavigationSidebar from "./NavigationSidebar";
 
 const React = require("react");
-const restClient = require("../restClient");
+const restClient = require("../../restClient");
 
 
 export default class NaturalProductCompoundCard extends React.Component {
@@ -26,10 +26,8 @@ export default class NaturalProductCompoundCard extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            naturalProduct: [],
-            showFragmentsWithSugar: false
+            naturalProduct: []
         };
-        this.handleFragmentsCheckbox = this.handleFragmentsCheckbox.bind(this);
         this.handleMolfileDownload = this.handleMolfileDownload.bind(this);
     }
 
@@ -39,7 +37,7 @@ export default class NaturalProductCompoundCard extends React.Component {
 
         restClient({
             method: "GET",
-            path: "/api/compound/search/findBy" + this.capitalize(identifier) + "?" + identifier + "=" + identifierValue
+            path: "/api/compound/search/findBy" + Utils.capitalize(identifier) + "?" + identifier + "=" + identifierValue
         }).then(
             (response) => {
                 this.setState({
@@ -53,16 +51,6 @@ export default class NaturalProductCompoundCard extends React.Component {
                     error: error
                 });
             });
-    }
-
-    capitalize(string) {
-        return string[0].toUpperCase() + string.slice(1);
-    }
-
-    handleFragmentsCheckbox(e) {
-        this.setState({
-            showFragmentsWithSugar: e.target.checked
-        });
     }
 
     handleMolfileDownload(e, smiles, identifier) {
@@ -87,6 +75,18 @@ export default class NaturalProductCompoundCard extends React.Component {
         } else if (!isLoaded) {
             return <Spinner/>;
         } else {
+            const compoundCardItems = [
+                "overview",
+                "representations",
+                "natural_product_likeness",
+                "molecular_properties",
+                "computed_properties",
+                "sources",
+                "species",
+                "synonyms",
+                "citations"
+            ];
+
             const structure = Utils.drawMoleculeBySmiles(naturalProduct.smiles);
 
             const bcutDescriptor = [];
@@ -94,69 +94,14 @@ export default class NaturalProductCompoundCard extends React.Component {
                 bcutDescriptor.push(<li key={index}>{item}</li>);
             });
 
-            const fragments = [];
-            Object.keys(naturalProduct.fragments).map((key) => {
-                fragments.push(
-                    <tr key={key}>
-                        <td>{key}</td>
-                        <td>{naturalProduct.fragments[key]}</td>
-                    </tr>
-                );
-            });
-
-            let fragmentsEqual = Utils.objectsAreEqual(naturalProduct.fragments, naturalProduct.fragmentsWithSugar);
-
-            if (!fragmentsEqual) {
-                const fragmentsWithSugar = [];
-                Object.keys(naturalProduct.fragmentsWithSugar).map((key) => {
-                    fragmentsWithSugar.push(
-                        <tr key={key}>
-                            <td>{key}</td>
-                            <td>{naturalProduct.fragmentsWithSugar[key]}</td>
-                        </tr>
-                    );
-
-                });
-            }
-
             return (
                 <Container>
                     <Row>
                         <Col sm={3}>
-                            <Nav className="flex-column" id="compoundCardSidebar">
-                                <HashRouter hashType="noslash">
-                                    <LinkContainer to="overview">
-                                        <Nav.Link className="text-primary">Overview</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="representations">
-                                        <Nav.Link className="text-primary">Representations</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="nplikeness">
-                                        <Nav.Link className="text-primary">Natural Product Likeness</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="molecular_properties">
-                                        <Nav.Link className="text-primary">Molecular Properties</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="computed_properties">
-                                        <Nav.Link className="text-primary">Computed Properties</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="sources">
-                                        <Nav.Link className="text-primary">Sources</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="species">
-                                        <Nav.Link className="text-primary">Species</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="synonyms">
-                                        <Nav.Link className="text-primary">Synonyms</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="citations">
-                                        <Nav.Link className="text-primary">Citations</Nav.Link>
-                                    </LinkContainer>
-                                </HashRouter>
-                            </Nav>
+                            <NavigationSidebar navigationItems={compoundCardItems} />
                         </Col>
                         <Col sm={9}>
-                            <Row id="overview">
+                            <Row id={compoundCardItems[0]}>
                                 <Card className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">{naturalProduct.inchikey}</Card.Title>
@@ -196,7 +141,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id="representations">
+                            <Row id={compoundCardItems[1]}>
                                 <Card className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Representations</Card.Title>
@@ -229,7 +174,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id="nplikeness">
+                            <Row id={compoundCardItems[2]}>
                                 <Card className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Natural Product Likeness</Card.Title>
@@ -254,7 +199,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id="molecular_properties">
+                            <Row id={compoundCardItems[3]}>
                                 <Card className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Molecular Properties</Card.Title>
@@ -307,7 +252,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id="computed_properties">
+                            <Row id={compoundCardItems[4]}>
                                 <Card className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Computed Properties</Card.Title>
@@ -410,27 +355,12 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id="fragments">
-                                <Card className="compoundCardItem">
-                                    <Card.Body>
-                                        <Card.Title className="text-primary">Fragments</Card.Title>
-                                        <br />
-                                        {fragmentsEqual ?
-                                            <Form.Check type="checkbox" id="fragmentsCheckbox" label="with sugar" disabled /> :
-                                            <Form.Check type="checkbox" id="fragmentsCheckbox" label="with sugar" checked={this.state.showFragmentsWithSugar} onChange={this.handleFragmentsCheckbox}/>}
-                                        {fragmentsEqual ?
-                                            <p>The fragments and fragments with sugar are equal.</p> :
-                                            null}
-                                        <Table size="sm">
-                                            <tbody>
-                                            {this.state.showFragmentsWithSugar ? fragmentsWithSugar : fragments}
-                                            </tbody>
-                                        </Table>
-                                    </Card.Body>
-                                </Card>
-                            </Row>
+                            {/* do not show fragments atm
                             <br/>
-                            <Row id="sources">
+                                <Fragments fragments={this.state.naturalProduct.fragments} fragmentsWithSugar={this.state.naturalProduct.fragmentsWithSugar}/>
+                            <br/>
+                            */}
+                            <Row id={compoundCardItems[5]}>
                                 <Card className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Sources</Card.Title>
@@ -443,7 +373,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id="species">
+                            <Row id={compoundCardItems[6]}>
                                 <Card className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Species</Card.Title>
@@ -456,7 +386,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id="synonyms">
+                            <Row id={compoundCardItems[7]}>
                                 <Card className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Synonyms</Card.Title>
@@ -469,7 +399,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id="citations">
+                            <Row id={compoundCardItems[8]}>
                                 <Card className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Citations</Card.Title>

@@ -1,5 +1,5 @@
 import Introduction from "./Introduction";
-import Browser from "./Browser";
+import Browser from "./browser/Browser";
 import Container from "react-bootstrap/Container";
 
 const React = require("react");

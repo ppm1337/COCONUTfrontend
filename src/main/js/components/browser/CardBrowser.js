@@ -1,5 +1,5 @@
 import Container from "react-bootstrap/Container";
-import NaturalProductCardItem from "./NaturalProductCardItem";
+import NaturalProductCardItem from "../NaturalProductCardItem";
 import CardDeck from "react-bootstrap/CardDeck";
 import Card from "react-bootstrap/Card";
 import {LinkContainer} from "react-router-bootstrap";

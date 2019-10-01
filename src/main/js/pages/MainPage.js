@@ -5,18 +5,18 @@ import {library} from "@fortawesome/fontawesome-svg-core"
 import {fas} from "@fortawesome/free-solid-svg-icons"
 library.add(fas);
 
-import Header from "../components/Header"
+import Header from "../components/header/Header"
 import Index from "../components/Index";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import About from "../components/About";
 import Container from "react-bootstrap/Container";
 import Download from "../components/Download";
-import Browser from "../components/Browser";
+import Browser from "../components/browser/Browser";
 import NotFound from "../components/NotFound";
 import SearchResult from "../components/SearchResult";
 import StructureSearch from "../components/StructureSearch";
 import AdvancedSearch from "../components/AdvancedSearch";
-import NaturalProductCompoundCard from "../components/NaturalProductCompoundCard";
+import NaturalProductCompoundCard from "../components/compoundcard/NaturalProductCompoundCard";
 
 const React = require("react");
 const ReactDOM = require("react-dom");

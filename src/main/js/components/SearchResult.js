@@ -1,5 +1,5 @@
 import Container from "react-bootstrap/Container";
-import CardBrowser from "./CardBrowser";
+import CardBrowser from "./browser/CardBrowser";
 import Row from "react-bootstrap/Row";
 import Error from "./Error";
 import Spinner from "./Spinner";

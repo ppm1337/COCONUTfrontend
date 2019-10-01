@@ -34,6 +34,10 @@ export default class Utils {
         }
     }
 
+    static capitalize(string) {
+        return string[0].toUpperCase() + string.slice(1);
+    }
+
     static objectsAreEqual(o1, o2) {
         const o1props = Object.getOwnPropertyNames(o1);
         const o2props = Object.getOwnPropertyNames(o2);

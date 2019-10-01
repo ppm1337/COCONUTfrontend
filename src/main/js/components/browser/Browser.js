@@ -8,12 +8,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {Redirect, Route, Switch} from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import BrowserViewPills from "./BrowserViewPills";
-import Spinner from "./Spinner";
-import Error from "./Error";
+import Spinner from "../Spinner";
+import Error from "../Error";
 import Pagination from "react-bootstrap/Pagination";
 
 const React = require("react");
-const restClient = require("../restClient");
+const restClient = require("../../restClient");
 
 
 export default class Browser extends React.Component {

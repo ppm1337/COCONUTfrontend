@@ -1,5 +1,5 @@
 import Table from "react-bootstrap/Table";
-import NaturalProductTableItem from "./NaturalProductTableItem";
+import NaturalProductTableItem from "../NaturalProductTableItem";
 
 const React = require("react");
 

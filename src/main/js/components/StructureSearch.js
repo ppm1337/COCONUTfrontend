@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Spinner from "./Spinner";
-import CardBrowser from "./CardBrowser";
+import CardBrowser from "./browser/CardBrowser";
 import Error from "./Error";
 
 const React = require("react");
