@@ -16,16 +16,21 @@ export default class HeaderNavBar extends React.Component {
             <Row id="headerNav">
                 <Col>
                     <Nav variant="tabs">
+                        <Nav.Item>
+                            <LinkContainer to="/" activeClassName="">
+                                <Nav.Link>Home</Nav.Link>
+                            </LinkContainer>
+                        </Nav.Item>
                         <Dropdown as={NavItem}>
                             <Dropdown.Toggle as={NavLink}>Browser</Dropdown.Toggle>
                             <Dropdown.Menu>
-                                <LinkContainer to="/browser/table">
+                                <LinkContainer to="/browser/table" activeClassName="active">
                                     <Dropdown.Item>
                                         <FontAwesomeIcon icon="table" fixedWidth/>
                                         &nbsp;Table Browser
                                     </Dropdown.Item>
                                 </LinkContainer>
-                                <LinkContainer to="/browser/cards">
+                                <LinkContainer to="/browser/cards" activeClassName="active">
                                     <Dropdown.Item>
                                         <FontAwesomeIcon icon="clipboard-list" fixedWidth/>
                                         &nbsp;Card Browser
@@ -36,13 +41,13 @@ export default class HeaderNavBar extends React.Component {
                         <Dropdown as={NavItem}>
                             <Dropdown.Toggle as={NavLink}>Search</Dropdown.Toggle>
                             <Dropdown.Menu>
-                                <LinkContainer to="/search/advanced">
+                                <LinkContainer to="/search/advanced" activeClassName="active">
                                     <Dropdown.Item>
                                         <FontAwesomeIcon icon="search-plus" fixedWidth/>
                                         &nbsp;Advanced Search
                                     </Dropdown.Item>
                                 </LinkContainer>
-                                <LinkContainer to="/search/structure">
+                                <LinkContainer to="/search/structure" activeClassName="active">
                                     <Dropdown.Item>
                                         <FontAwesomeIcon icon="atom" fixedWidth/>
                                         &nbsp;Structure Search

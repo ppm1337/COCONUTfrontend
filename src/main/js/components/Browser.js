@@ -119,11 +119,12 @@ export default class Browser extends React.Component {
                             </Row>
                             <br/>
                             <Row>
-                                <BrowserFilter/>
+                                {/*There are no filters yet. */}
+                                {/*<BrowserFilter/>*/}
                             </Row>
                             <br/>
                             <Row>
-                                <BrowserViewPills />
+                                <BrowserViewPills {...this.props}/>
                             </Row>
                             <br/>
                             <Row>
@@ -164,6 +165,8 @@ export default class Browser extends React.Component {
                 <Route path="/browser/cards" component={CardBrowserWithSubscription}/>
                 <Route path="/browser/table" component={TableBrowserWithSubscription}/>
                 <Redirect from="/browser*" to="/browser/cards"/>
+                {/* if none of the above routes match, show the CardBrowser (e.g. on the index page) */}
+                <Route component={CardBrowserWithSubscription}/>
             </Switch>
         );
     }
