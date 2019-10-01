@@ -101,8 +101,8 @@ export default class NaturalProductCompoundCard extends React.Component {
                             <NavigationSidebar navigationItems={compoundCardItems} />
                         </Col>
                         <Col sm={9}>
-                            <Row id={compoundCardItems[0]}>
-                                <Card className="compoundCardItem">
+                            <Row>
+                                <Card id={compoundCardItems[0]} className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">{naturalProduct.inchikey}</Card.Title>
                                         <br />
@@ -141,8 +141,8 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id={compoundCardItems[1]}>
-                                <Card className="compoundCardItem">
+                            <Row>
+                                <Card id={compoundCardItems[1]} className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Representations</Card.Title>
                                         <br />
@@ -174,8 +174,8 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id={compoundCardItems[2]}>
-                                <Card className="compoundCardItem">
+                            <Row>
+                                <Card id={compoundCardItems[2]} className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Natural Product Likeness</Card.Title>
                                         <br />
@@ -199,8 +199,8 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id={compoundCardItems[3]}>
-                                <Card className="compoundCardItem">
+                            <Row>
+                                <Card id={compoundCardItems[3]} className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Molecular Properties</Card.Title>
                                         <br />
@@ -252,8 +252,8 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id={compoundCardItems[4]}>
-                                <Card className="compoundCardItem">
+                            <Row>
+                                <Card id={compoundCardItems[4]} className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Computed Properties</Card.Title>
                                         <br />
@@ -357,11 +357,11 @@ export default class NaturalProductCompoundCard extends React.Component {
                             <br/>
                             {/* do not show fragments atm
                             <br/>
-                                <Fragments fragments={this.state.naturalProduct.fragments} fragmentsWithSugar={this.state.naturalProduct.fragmentsWithSugar}/>
+                                <Fragments id={"..."} fragments={this.state.naturalProduct.fragments} fragmentsWithSugar={this.state.naturalProduct.fragmentsWithSugar}/>
                             <br/>
                             */}
-                            <Row id={compoundCardItems[5]}>
-                                <Card className="compoundCardItem">
+                            <Row>
+                                <Card id={compoundCardItems[5]} className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Sources</Card.Title>
                                         <br />
@@ -373,8 +373,8 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id={compoundCardItems[6]}>
-                                <Card className="compoundCardItem">
+                            <Row>
+                                <Card id={compoundCardItems[6]} className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Species</Card.Title>
                                         <br />
@@ -386,8 +386,8 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id={compoundCardItems[7]}>
-                                <Card className="compoundCardItem">
+                            <Row>
+                                <Card id={compoundCardItems[7]} className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Synonyms</Card.Title>
                                         <br />
@@ -399,8 +399,8 @@ export default class NaturalProductCompoundCard extends React.Component {
                                 </Card>
                             </Row>
                             <br/>
-                            <Row id={compoundCardItems[8]}>
-                                <Card className="compoundCardItem">
+                            <Row>
+                                <Card id={compoundCardItems[8]} className="compoundCardItem">
                                     <Card.Body>
                                         <Card.Title className="text-primary">Citations</Card.Title>
                                         <br />

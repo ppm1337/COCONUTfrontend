@@ -50,8 +50,8 @@ export default class Fragments extends React.Component {
         }
 
         return (
-            <Row id="fragments">
-                <Card className="compoundCardItem">
+            <Row>
+                <Card id={this.props.id} className="compoundCardItem">
                     <Card.Body>
                         <Card.Title className="text-primary">Fragments</Card.Title>
                         <br />

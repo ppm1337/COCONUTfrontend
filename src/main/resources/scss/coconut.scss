@@ -22,6 +22,10 @@ $coconut-header-height: 215px;
 @import "~bootstrap/scss/bootstrap";
 
 /* CSS */
+html {
+  scroll-behavior: smooth;
+}
+
 #header {
   background-color: white;
   padding-top: 15px;
