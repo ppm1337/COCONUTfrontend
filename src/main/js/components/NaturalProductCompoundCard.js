@@ -2,6 +2,7 @@ import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Table from "react-bootstrap/Table";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -24,8 +25,10 @@ export default class NaturalProductCompoundCard extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            naturalProduct: []
+            naturalProduct: [],
+            showFragmentsWithSugar: false
         };
+        this.handleFragmentsCheckbox = this.handleFragmentsCheckbox.bind(this);
     }
 
     componentDidMount() {
@@ -54,6 +57,12 @@ export default class NaturalProductCompoundCard extends React.Component {
         return string[0].toUpperCase() + string.slice(1);
     }
 
+    handleFragmentsCheckbox(e) {
+        this.setState({
+            showFragmentsWithSugar: e.target.checked
+        });
+    }
+
     render() {
         const { error, isLoaded, naturalProduct } = this.state;
 
@@ -64,13 +73,35 @@ export default class NaturalProductCompoundCard extends React.Component {
         } else {
             const structure = Utils.drawMoleculeBySmiles(naturalProduct.smiles);
 
-            let bcutDescriptorCount = 0;
-            const bcutDescriptor = naturalProduct.bcutDescriptor.map((item, index) => {
-                <tr key={index}>
-                    <td>{item}</td>
-                </tr>
-                bcutDescriptorCount++;
+            const bcutDescriptor = [];
+            naturalProduct.bcutDescriptor.map((item, index) => {
+                bcutDescriptor.push(<td key={index}>{item}</td>);
             });
+
+            const fragments = [];
+            Object.keys(naturalProduct.fragments).map((key) => {
+                fragments.push(
+                    <tr key={key}>
+                        <td>{key}</td>
+                        <td>{naturalProduct.fragments[key]}</td>
+                    </tr>
+                );
+            });
+
+            let fragmentsEqual = Utils.objectsAreEqual(naturalProduct.fragments, naturalProduct.fragmentsWithSugar);
+
+            if (!fragmentsEqual) {
+                const fragmentsWithSugar = [];
+                Object.keys(naturalProduct.fragmentsWithSugar).map((key) => {
+                    fragmentsWithSugar.push(
+                        <tr key={key}>
+                            <td>{key}</td>
+                            <td>{naturalProduct.fragmentsWithSugar[key]}</td>
+                        </tr>
+                    );
+
+                });
+            }
 
             return (
                 <Container>
@@ -323,7 +354,7 @@ export default class NaturalProductCompoundCard extends React.Component {
                                                 }>
                                                     <td>BCUT Descriptor</td>
                                                 </OverlayTrigger>
-                                                <td>{bcutDescriptor}</td>
+                                                {bcutDescriptor}
                                             </tr>
                                             <tr>
                                                 <OverlayTrigger key="fsp3Overlay" placement="top" overlay={
@@ -349,6 +380,26 @@ export default class NaturalProductCompoundCard extends React.Component {
                                                 <td>to be continued....</td>
                                                 <td>to be continued....</td>
                                             </tr>
+                                            </tbody>
+                                        </Table>
+                                    </Card.Body>
+                                </Card>
+                            </Row>
+                            <br/>
+                            <Row id="fragments">
+                                <Card className="compoundCardItem">
+                                    <Card.Body>
+                                        <Card.Title className="text-primary">Fragments</Card.Title>
+                                        <br />
+                                        {fragmentsEqual ?
+                                            <Form.Check type="checkbox" id="fragmentsCheckbox" label="with sugar" disabled /> :
+                                            <Form.Check type="checkbox" id="fragmentsCheckbox" label="with sugar" checked={this.state.showFragmentsWithSugar} onChange={this.handleFragmentsCheckbox}/>}
+                                        {fragmentsEqual ?
+                                            <p>The fragments and fragments with sugar are equal.</p> :
+                                            null}
+                                        <Table size="sm">
+                                            <tbody>
+                                            {this.state.showFragmentsWithSugar ? fragmentsWithSugar : fragments}
                                             </tbody>
                                         </Table>
                                     </Card.Body>

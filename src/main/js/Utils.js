@@ -24,4 +24,22 @@ export default class Utils {
         return canvas;
     }
 
+    static objectsAreEqual(o1, o2) {
+        const o1props = Object.getOwnPropertyNames(o1);
+        const o2props = Object.getOwnPropertyNames(o2);
+
+        if (o1props.length !== o2props.length) {
+            return false;
+        }
+
+        for (let i = 0; i < o1props.length; i++) {
+            let prop = o1props[i];
+
+            if (o1props[prop] !== o2props[prop]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
