@@ -14,6 +14,7 @@ import {HashRouter} from "react-router-dom";
 import Spinner from "./Spinner";
 import Error from "./Error";
 import Utils from "../Utils";
+import Button from "react-bootstrap/Button";
 
 const React = require("react");
 const restClient = require("../restClient");
@@ -29,6 +30,7 @@ export default class NaturalProductCompoundCard extends React.Component {
             showFragmentsWithSugar: false
         };
         this.handleFragmentsCheckbox = this.handleFragmentsCheckbox.bind(this);
+        this.handleMolfileDownload = this.handleMolfileDownload.bind(this);
     }
 
     componentDidMount() {
@@ -53,7 +55,7 @@ export default class NaturalProductCompoundCard extends React.Component {
             });
     }
 
-    capitalize (string) {
+    capitalize(string) {
         return string[0].toUpperCase() + string.slice(1);
     }
 
@@ -61,6 +63,20 @@ export default class NaturalProductCompoundCard extends React.Component {
         this.setState({
             showFragmentsWithSugar: e.target.checked
         });
+    }
+
+    handleMolfileDownload(e, smiles, identifier) {
+        e.preventDefault();
+
+        const download = document.createElement("a");
+
+        download.setAttribute("href", "data:chemical/x-mdl-molfile;charset=utf-8," + encodeURIComponent(Utils.getMolfileStringBySmiles(smiles)));
+        download.setAttribute("download", "Molfile_V3_" + identifier + ".mol");
+        download.style.display = "none";
+
+        document.body.appendChild(download);
+        download.click();
+        document.body.removeChild(download);
     }
 
     render() {
@@ -170,6 +186,10 @@ export default class NaturalProductCompoundCard extends React.Component {
                                                     </tr>
                                                     </tbody>
                                                 </Table>
+                                                <Button id="downloadMolfile" variant="outline-primary" size="sm" onClick={(e) => this.handleMolfileDownload(e, naturalProduct.smiles, naturalProduct.inchikey)}>
+                                                    <FontAwesomeIcon icon="file-download" fixedWidth/>
+                                                    &nbsp;Molfile
+                                                </Button>
                                             </Col>
                                         </Row>
                                     </Card.Body>

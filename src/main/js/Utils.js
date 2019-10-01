@@ -24,6 +24,16 @@ export default class Utils {
         return canvas;
     }
 
+    static getMolfileStringBySmiles(smiles) {
+        try {
+            const npMolecule = OpenChemLib.Molecule.fromSmiles(smiles);
+            console.log(npMolecule.toMolfileV3());
+            return npMolecule.toMolfileV3();
+        } catch(e) {
+            console.log(e.name + " in OpenChemLib: " + e.message);
+        }
+    }
+
     static objectsAreEqual(o1, o2) {
         const o1props = Object.getOwnPropertyNames(o1);
         const o2props = Object.getOwnPropertyNames(o2);
@@ -42,4 +52,5 @@ export default class Utils {
 
         return true;
     }
+
 }
