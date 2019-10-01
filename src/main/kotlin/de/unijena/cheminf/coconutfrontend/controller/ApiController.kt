@@ -28,18 +28,13 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
     val smilesGenerator: SmilesGenerator = SmilesGenerator(SmiFlavor.Unique)
 
     @RequestMapping("/search/structure")
-    fun structureSearchBySmiles(@RequestParam("smiles") encodedSmiles: String): List<UniqueNaturalProduct> {
-        // val smiles = URLDecoder.decode(encodedSmiles, "UTF-8")
-
-        return this.doStructureSearchBySmiles(encodedSmiles)
+    fun structureSearchBySmiles(@RequestParam("smiles") smiles: String): List<UniqueNaturalProduct> {
+        return this.doStructureSearchBySmiles(smiles)
     }
 
     @RequestMapping("/search/simple")
-    fun simpleSearch(@RequestParam("query") encodedQueryString: String): Map<String, Any> {
-        // val queryString = URLDecoder.decode(encodedQueryString, "UTF-8")
-        println("Input queryString: $encodedQueryString")
-        // println("Decoded queryString: $queryString")
-        return this.doSimpleSearch(encodedQueryString)
+    fun simpleSearch(@RequestParam("query") queryString: String): Map<String, Any> {
+        return this.doSimpleSearch(queryString)
     }
 
     fun doStructureSearchBySmiles(smiles: String): List<UniqueNaturalProduct> {
@@ -47,10 +42,7 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
             val parsedSmiles: IAtomContainer = this.smilesParser.parseSmiles(smiles)
             val canonicalSmiles: String = this.smilesGenerator.create(parsedSmiles)
 
-            println("Input Smiles: $smiles")
-            println("Canonical Smiles: $canonicalSmiles")
-
-            return this.uniqueNaturalProductRepository.findByCleanSmiles(smiles)
+            return this.uniqueNaturalProductRepository.findByCleanSmiles(canonicalSmiles)
 
         } catch (e: InvalidSmilesException) {
             error("An InvalidSmilesException occured: ${e.message}")

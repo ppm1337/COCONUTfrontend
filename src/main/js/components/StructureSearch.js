@@ -20,8 +20,7 @@ export default class StructureSearch extends React.Component {
             ajaxError: null,
             ajaxIsLoaded: false,
             ajaxResult: [],
-            searchSubmitted: false,
-            searchSmiles: null
+            searchSubmitted: false
         };
         this.handleDesireForCoffee = this.handleDesireForCoffee.bind(this);
         this.handleStructureSubmit = this.handleStructureSubmit.bind(this);
@@ -36,16 +35,13 @@ export default class StructureSearch extends React.Component {
         const caffeineCleanSmiles = "O=C1C2=C(N=CN2C)N(C(=O)N1C)C";
 
         this.editor.setSmiles(caffeineCleanSmiles);
-        console.log(caffeineCleanSmiles);
-        console.log(this.editor.getSmiles());
     }
 
     handleStructureSubmit() {
         let structureAsSmiles = this.editor.getSmiles();
 
         this.setState({
-            searchSubmitted: true,
-            searchSmiles: structureAsSmiles
+            searchSubmitted: true
         });
 
         this.doSearchBySmiles(structureAsSmiles);
@@ -71,29 +67,17 @@ export default class StructureSearch extends React.Component {
     }
 
     render() {
-        const {ajaxError, ajaxIsLoaded, ajaxResult, searchSmiles, searchSubmitted} = this.state;
+        const {ajaxError, ajaxIsLoaded, ajaxResult, searchSubmitted} = this.state;
         let resultRow;
-        let smilesInfo;
 
         if (searchSubmitted) {
-            smilesInfo = (
-                <Form.Group as={Row}>
-                    <Form.Label column sm="2">
-                        Smiles:
-                    </Form.Label>
-                    <Col sm="10">
-                        <Form.Control type="text" placeholder={searchSmiles} />
-                    </Col>
-                </Form.Group>
-            );
-
             if (ajaxError) {
                 resultRow = <Error/>;
             } else if (!ajaxIsLoaded) {
                 resultRow = <Row className="justify-content-center"><Spinner/></Row>;
             } else {
                 if (ajaxResult.length > 0) {
-                    resultRow = <CardBrowser naturalProducts={ajaxResult}/>;
+                    resultRow = <Row><CardBrowser naturalProducts={ajaxResult}/></Row>;
                 } else {
                     resultRow = <Row><p>There are no results that exactly match your structure.</p></Row>;
                 }
@@ -113,27 +97,21 @@ export default class StructureSearch extends React.Component {
                 <Row>
                     <Form>
                         <Form.Group>
-                            <Form.Check type="checkbox" label="Exact match (Note: substructure search not implemented yet.)" checked disabled/>
+                            <Form.Check type="checkbox" label="Exact match (note: substructure search not implemented yet.)" checked disabled/>
                         </Form.Group>
                     </Form>
                 </Row>
                 <Row>
-                    <Col sm={2}>
-                        <Button id="structureSearchButton" variant="primary" type="submit" onClick={this.handleStructureSubmit}>
-                            <FontAwesomeIcon icon="search" fixedWidth/>
-                            &nbsp;Search
-                        </Button>
-                    </Col>
-                    <Col sm={2}>
-                        <Button id="structureSearchDrawExampleButton" variant="primary" type="submit" onClick={this.handleDesireForCoffee}>
-                            <FontAwesomeIcon icon="mug-hot" fixedWidth/>
-                        </Button>
-                    </Col>
-                    <Col sm={8}>
-                        {smilesInfo}
-                    </Col>
+                    <Button id="structureSearchButton" variant="primary" type="submit" onClick={this.handleStructureSubmit}>
+                        <FontAwesomeIcon icon="search" fixedWidth/>
+                        &nbsp;Search
+                    </Button>
+                    <Button id="structureSearchDrawExampleButton" variant="primary" type="submit" onClick={this.handleDesireForCoffee}>
+                        <FontAwesomeIcon icon="mug-hot" fixedWidth/>
+                    </Button>
                 </Row>
                 <br/>
+                {ajaxIsLoaded && <Row><h2>Search Results</h2></Row>}
                 {resultRow}
             </Container>
         );
