@@ -54,11 +54,9 @@ export default class CrossReferences extends React.Component {
 
             let sourceTableRows = [];
             sourceNaturalProducts.map((item, index) => {
-                console.log(item);
                 const buttonToSource =
                     <Button id={"linkTo" + item["idInSource"]} variant="outline-primary" size="sm" disabled>
                         <FontAwesomeIcon icon="external-link-alt" fixedWidth/>
-                        &nbsp;
                     </Button>;
 
                 sourceTableRows.push(

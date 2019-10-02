@@ -1,8 +1,6 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import Table from "react-bootstrap/Table";
-import Card from "react-bootstrap/Card";
 import Spinner from "../Spinner";
 import Error from "../Error";
 import Utils from "../../Utils";
@@ -87,34 +85,34 @@ export default class NaturalProductCompoundCard extends React.Component {
                             <NavigationSidebar navigationItems={compoundCardItems} />
                         </Col>
                         <Col sm={9}>
-                            <Row id={compoundCardItems[0]}>
+                            <Row id={compoundCardItems[0]} className="compoundCardRow">
                                 <Overview naturalProduct={naturalProduct}/>
                             </Row>
                             <br/>
-                            <Row id={compoundCardItems[1]}>
+                            <Row id={compoundCardItems[1]} className="compoundCardRow">
                                 <Representations naturalProduct={naturalProduct}/>
                             </Row>
                             <br/>
-                            <Row id={compoundCardItems[2]}>
+                            <Row id={compoundCardItems[2]} className="compoundCardRow">
                                 <NPlikeness naturalProduct={naturalProduct}/>
                             </Row>
                             <br/>
-                            <Row id={compoundCardItems[3]}>
+                            <Row id={compoundCardItems[3]} className="compoundCardRow">
                                 <MolecularProperties naturalProduct={naturalProduct}/>
                             </Row>
                             <br/>
-                            <Row id={compoundCardItems[4]}>
+                            <Row id={compoundCardItems[4]} className="compoundCardRow">
                                 <ComputedProperties naturalProduct={naturalProduct}/>
                             </Row>
                             <br/>
                             {/* hide fragments
                             <br/>
-                            <Row id="">
+                            <Row id="" className="compoundCardRow">
                                 <Fragments fragments={this.state.naturalProduct.fragments} fragmentsWithSugar={this.state.naturalProduct.fragmentsWithSugar}/>
                             </Row>
                             <br/>
                             */}
-                            <Row id={compoundCardItems[5]}>
+                            <Row id={compoundCardItems[5]} className="compoundCardRow">
                                 <CrossReferences naturalProduct={naturalProduct}/>
                             </Row>
                             <br/>
