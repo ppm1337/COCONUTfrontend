@@ -15,7 +15,7 @@ $theme-colors: (
 $enable-rounded: false;
 $enable-shadows: true;
 
-$coconut-box-shadow: 0 .2rem .5rem 0 rgba(60, 60, 60, .15) !important;
+$coconut-box-shadow: 0 .2rem .5rem 0 rgba(60, 60, 160, .15) !important;
 $coconut-header-height: 215px;
 
 /* bootstrap and its default variables */
@@ -32,15 +32,15 @@ html {
   box-shadow: $coconut-box-shadow;
 }
 
-#headerIconCaption {
-  font-size: xx-small;
+#headerIcon {
+  margin-bottom: 10px;
 }
 
 #headerNav {
   margin-top: 15px;
 }
 
-#searchButton {
+#searchButton, #structureSearchButton, #structureSearchDrawExampleButton {
   margin-left: 5px;
 }
 
@@ -66,15 +66,15 @@ h {
 
 .compoundCardItem {
   width: 100%;
+}
 
-  &::before {
-    display: block;
-    content: " ";
-    margin-top: -$coconut-header-height;
-    height: $coconut-header-height;
-    visibility: hidden;
-    pointer-events: none;
-  }
+.compoundCardRow:before {
+  display: block;
+  content: " ";
+  margin-top: -$coconut-header-height;
+  height: $coconut-header-height;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .card table tr td {
@@ -112,10 +112,6 @@ h {
   height: 405px;
   border: thin solid map_get($theme-colors, "primary");
   box-shadow: $coconut-box-shadow
-}
-
-#structureSearchButton, #structureSearchDrawExampleButton {
-  margin-right: 5px;
 }
 
 .tableThumbnail {
