@@ -5,15 +5,19 @@ import Utils from "../../Utils";
 
 const React = require("react");
 
+
 export default class NavigationSidebar extends React.Component {
     render() {
         const navigationItems = [];
         this.props.navigationItems.map((item) => {
-            navigationItems.push(
-                <LinkContainer key={item} to={item}>
-                    <Nav.Link className="text-primary">{Utils.capitalize(item.replace(/\_/g, " "))}</Nav.Link>
-                </LinkContainer>
-            );
+            // make sure item is string when using string function on it
+            if (typeof(item) === "string") {
+                navigationItems.push(
+                    <LinkContainer key={item} to={item}>
+                        <Nav.Link className="text-primary">{Utils.capitalize(item.replace(/_/g, " "))}</Nav.Link>
+                    </LinkContainer>
+                );
+            }
         });
 
         return (

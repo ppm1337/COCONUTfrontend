@@ -68,10 +68,16 @@ export default class NaturalProductCompoundCard extends React.Component {
                 "natural_product_likeness",
                 "molecular_properties",
                 "computed_properties",
-                "cross_references",
+                "cross_references"
+                /*
+                this information is also attached to sourceNaturalProduct,
+                consider adding these in cross reference section
+
                 "species",
                 "synonyms",
                 "citations"
+
+                */
             ];
 
             return (
@@ -110,45 +116,6 @@ export default class NaturalProductCompoundCard extends React.Component {
                             */}
                             <Row id={compoundCardItems[5]}>
                                 <CrossReferences naturalProduct={naturalProduct}/>
-                            </Row>
-                            <br/>
-                            <Row>
-                                <Card id={compoundCardItems[6]} className="compoundCardItem">
-                                    <Card.Body>
-                                        <Card.Title className="text-primary">Species</Card.Title>
-                                        <br />
-                                        <Table size="sm">
-                                            <tbody>
-                                            </tbody>
-                                        </Table>
-                                    </Card.Body>
-                                </Card>
-                            </Row>
-                            <br/>
-                            <Row>
-                                <Card id={compoundCardItems[7]} className="compoundCardItem">
-                                    <Card.Body>
-                                        <Card.Title className="text-primary">Synonyms</Card.Title>
-                                        <br />
-                                        <Table size="sm">
-                                            <tbody>
-                                            </tbody>
-                                        </Table>
-                                    </Card.Body>
-                                </Card>
-                            </Row>
-                            <br/>
-                            <Row>
-                                <Card id={compoundCardItems[8]} className="compoundCardItem">
-                                    <Card.Body>
-                                        <Card.Title className="text-primary">Citations</Card.Title>
-                                        <br />
-                                        <Table size="sm">
-                                            <tbody>
-                                            </tbody>
-                                        </Table>
-                                    </Card.Body>
-                                </Card>
                             </Row>
                             <br/>
                         </Col>
