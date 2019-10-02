@@ -50,25 +50,23 @@ export default class Fragments extends React.Component {
         }
 
         return (
-            <Row>
-                <Card id={this.props.id} className="compoundCardItem">
-                    <Card.Body>
-                        <Card.Title className="text-primary">Fragments</Card.Title>
-                        <br />
-                        {fragmentsEqual ?
-                            <Form.Check type="checkbox" id="fragmentsCheckbox" label="with sugar" disabled /> :
-                            <Form.Check type="checkbox" id="fragmentsCheckbox" label="with sugar" checked={this.state.showFragmentsWithSugar} onChange={this.handleFragmentsCheckbox}/>}
-                        {fragmentsEqual ?
-                            <p>The fragments and fragments with sugar are equal.</p> :
-                            null}
-                        <Table size="sm">
-                            <tbody>
-                            {this.state.showFragmentsWithSugar ? fragmentsWithSugar : fragments}
-                            </tbody>
-                        </Table>
-                    </Card.Body>
-                </Card>
-            </Row>
+            <Card className="compoundCardItem">
+                <Card.Body>
+                    <Card.Title className="text-primary">Fragments</Card.Title>
+                    <br />
+                    {fragmentsEqual ?
+                        <Form.Check type="checkbox" id="fragmentsCheckbox" label="with sugar" disabled /> :
+                        <Form.Check type="checkbox" id="fragmentsCheckbox" label="with sugar" checked={this.state.showFragmentsWithSugar} onChange={this.handleFragmentsCheckbox}/>}
+                    {fragmentsEqual ?
+                        <p>The fragments and fragments with sugar are equal.</p> :
+                        null}
+                    <Table size="sm">
+                        <tbody>
+                        {this.state.showFragmentsWithSugar ? fragmentsWithSugar : fragments}
+                        </tbody>
+                    </Table>
+                </Card.Body>
+            </Card>
         );
     }
 }

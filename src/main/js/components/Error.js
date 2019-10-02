@@ -17,12 +17,8 @@ export default class Error extends React.Component {
         return (
             <Container>
                 <Row className="justify-content-center">
-                    <Col sm={3}>
-                        <FontAwesomeIcon icon="bug" className="standAloneIcon" size="4x"/>
-                    </Col>
-                    <Col sm={6}>
-                        <p>An error occurred..</p>
-                    </Col>
+                    <FontAwesomeIcon icon="bug" className="standAloneIcon" size="3x"/>
+                    <p>An error occurred..</p>
                 </Row>
             </Container>
         );
