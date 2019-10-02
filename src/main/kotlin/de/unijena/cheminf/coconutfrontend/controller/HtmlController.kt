@@ -1,12 +1,12 @@
 package de.unijena.cheminf.coconutfrontend.controller
 
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
 class HtmlController {
 
-    @RequestMapping(
+    @GetMapping(
             "/*",
             "/browser/*",
             "/search/*",
