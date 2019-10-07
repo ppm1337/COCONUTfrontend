@@ -26,7 +26,7 @@ export default class CrossReferences extends React.Component {
     fetchSourcesByInchikey(inchikey) {
         restClient({
             method: "GET",
-            path: "/api/source/search/findBySimpleInchiKey?inchikey=" + inchikey
+            path: "/api/source/search/findBySimpleInchiKey?inchikey=" + encodeURIComponent(inchikey)
         }).then(
             (response) => {
                 this.setState({

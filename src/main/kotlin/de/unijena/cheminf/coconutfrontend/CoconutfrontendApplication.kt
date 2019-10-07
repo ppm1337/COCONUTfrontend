@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories("de.unijena.cheminf.npopensourcecollector.mongocollections")
 class CoconutfrontendApplication
 
+
 fun main(args: Array<String>) {
+	System.setProperty("org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH", "true");
 	runApplication<CoconutfrontendApplication>(*args)
 }

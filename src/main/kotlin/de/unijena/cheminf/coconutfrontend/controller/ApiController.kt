@@ -12,6 +12,7 @@ import org.openscience.cdk.smiles.SmilesParser
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.net.URLDecoder
 
 @RestController
 @RequestMapping("/api")
@@ -29,12 +30,12 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
 
     @RequestMapping("/search/structure")
     fun structureSearchBySmiles(@RequestParam("smiles") smiles: String): List<UniqueNaturalProduct> {
-        return this.doStructureSearchBySmiles(smiles)
+        return this.doStructureSearchBySmiles(URLDecoder.decode(smiles.trim(), "UTF-8"))
     }
 
     @RequestMapping("/search/simple")
     fun simpleSearch(@RequestParam("query") queryString: String): Map<String, Any> {
-        return this.doSimpleSearch(queryString)
+        return this.doSimpleSearch(URLDecoder.decode(queryString.trim(), "UTF-8"))
     }
 
     fun doStructureSearchBySmiles(smiles: String): List<UniqueNaturalProduct> {
@@ -72,7 +73,7 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
             hitsMap["inchi"]!! -> this.uniqueNaturalProductRepository.findByInchi(query)
             hitsMap["inchikey"]!! -> this.uniqueNaturalProductRepository.findByInchikey(query)
             hitsMap["molecular_formula"]!! -> this.uniqueNaturalProductRepository.findByMolecularFormula(query)
-            hitsMap["smiles"]!! -> this.doStructureSearchBySmiles(query)
+            hitsMap["smiles"]!! -> this.uniqueNaturalProductRepository.findBySmiles(query) // this.doStructureSearchBySmiles(query)
             else -> emptyList()
         }
 

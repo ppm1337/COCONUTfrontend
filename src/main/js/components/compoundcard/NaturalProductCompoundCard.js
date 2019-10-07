@@ -36,7 +36,7 @@ export default class NaturalProductCompoundCard extends React.Component {
     fetchNaturalProductByIdentifier(identifier, identifierValue) {
         restClient({
             method: "GET",
-            path: "/api/compound/search/findBy" + Utils.capitalize(identifier) + "?" + identifier + "=" + identifierValue
+            path: "/api/compound/search/findBy" + Utils.capitalize(identifier) + "?" + identifier + "=" + encodeURIComponent(identifierValue)
         }).then(
             (response) => {
                 this.setState({

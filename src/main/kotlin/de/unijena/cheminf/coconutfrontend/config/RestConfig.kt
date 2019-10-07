@@ -1,4 +1,4 @@
-package de.unijena.cheminf.coconutfrontend
+package de.unijena.cheminf.coconutfrontend.config
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration

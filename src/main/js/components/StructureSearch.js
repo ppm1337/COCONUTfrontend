@@ -50,7 +50,7 @@ export default class StructureSearch extends React.Component {
     doSearchBySmiles(smiles) {
         restClient({
             method: "GET",
-            path: "/api/search/structure?smiles=" + smiles // encodeURIComponent(smiles)
+            path: "/api/search/structure?smiles=" + encodeURIComponent(smiles)
         }).then(
             (response) => {
                 this.setState({

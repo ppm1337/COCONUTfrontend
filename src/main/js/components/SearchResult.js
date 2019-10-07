@@ -25,7 +25,7 @@ export default class SearchResult extends React.Component {
     fetchSearchResults() {
         restClient({
             method: "GET",
-            path: "/api/search/simple?query=" + this.props.match.params.q // encodeURIComponent(queryString)
+            path: "/api/search/simple?query=" + encodeURIComponent(this.props.match.params.q)
         }).then(
             (response) => {
                 this.setState({

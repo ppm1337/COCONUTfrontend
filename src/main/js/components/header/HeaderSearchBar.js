@@ -5,7 +5,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {LinkContainer} from "react-router-bootstrap";
-import {Redirect} from "react-router-dom";
+import {Redirect, Switch} from "react-router-dom";
 
 const React = require("react");
 
@@ -21,8 +21,6 @@ export default class HeaderSearchBar extends React.Component {
     }
 
     handleSearchSubmit(e) {
-        e.preventDefault();
-
         this.setState({
             searchSubmitted: true,
             queryString: document.getElementById("searchInput").value
@@ -38,9 +36,7 @@ export default class HeaderSearchBar extends React.Component {
                         <Form.Control id="searchInput" type="text" placeholder="SMILES, InChI, InChIKey, formula"/>
                         <InputGroup.Append>
                             <Button id="searchButton" variant="primary" type="submit" onClick={this.handleSearchSubmit}>
-                                {this.state.searchSubmitted ?
-                                    <FontAwesomeIcon id="searchButtonIcon" icon="spinner" fixedWidth spin/> :
-                                    <FontAwesomeIcon id="searchButtonIcon" icon="search" fixedWidth/>}
+                                <FontAwesomeIcon id="searchButtonIcon" icon="search" fixedWidth/>
                                 &nbsp;Search
                             </Button>
                         </InputGroup.Append>
@@ -55,7 +51,7 @@ export default class HeaderSearchBar extends React.Component {
                         </LinkContainer>
                     </Form.Text>
                 </Col>
-                {this.state.searchSubmitted && <Redirect to={"/search/simple/" + this.state.queryString}/>}
+                {this.state.searchSubmitted && <Redirect to={"/search/simple/" + encodeURIComponent(this.state.queryString)}/>}
             </Row>
         );
     }
