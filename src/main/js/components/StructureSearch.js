@@ -90,7 +90,7 @@ export default class StructureSearch extends React.Component {
                 resultRow =
                     <Row className="justify-content-center">
                         <Spinner/>
-                        {exactMatch && <p>Note: The substructure search is estimated to take 3-4 minutes.</p>}
+                        {!exactMatch && <p>Note: The substructure search is estimated to take 3-4 minutes.</p>}
                     </Row>
             } else {
                 if (ajaxResult.length > 0) {
