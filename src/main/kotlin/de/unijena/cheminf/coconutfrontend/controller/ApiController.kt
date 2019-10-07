@@ -5,10 +5,14 @@ import de.unijena.cheminf.npopensourcecollector.mongocollections.UniqueNaturalPr
 import org.openscience.cdk.exception.CDKException
 import org.openscience.cdk.exception.InvalidSmilesException
 import org.openscience.cdk.interfaces.IAtomContainer
+import org.openscience.cdk.isomorphism.Ullmann
 import org.openscience.cdk.silent.SilentChemObjectBuilder
 import org.openscience.cdk.smiles.SmiFlavor
 import org.openscience.cdk.smiles.SmilesGenerator
 import org.openscience.cdk.smiles.SmilesParser
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Slice
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -33,6 +37,11 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
         return this.doStructureSearchBySmiles(URLDecoder.decode(smiles.trim(), "UTF-8"))
     }
 
+    @RequestMapping("/search/substructure")
+    fun substructureSearch(@RequestParam("smiles") smiles: String): List<UniqueNaturalProduct> {
+        return this.doSubstructureSearch(URLDecoder.decode(smiles.trim(), "UTF-8"))
+    }
+
     @RequestMapping("/search/simple")
     fun simpleSearch(@RequestParam("query") queryString: String): Map<String, Any> {
         return this.doSimpleSearch(URLDecoder.decode(queryString.trim(), "UTF-8"))
@@ -44,6 +53,46 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
             val canonicalSmiles: String = this.smilesGenerator.create(parsedSmiles)
 
             return this.uniqueNaturalProductRepository.findByCleanSmiles(canonicalSmiles)
+
+        } catch (e: InvalidSmilesException) {
+            error("An InvalidSmilesException occured: ${e.message}")
+        } catch (e: CDKException) {
+            error("A CDKException occured: ${e.message}")
+        }
+    }
+
+    fun doSubstructureSearch(smiles: String): List<UniqueNaturalProduct> {
+        try {
+            val parsedSubstructureSmiles: IAtomContainer = this.smilesParser.parseSmiles(smiles)
+            val pattern = Ullmann.findSubstructure(parsedSubstructureSmiles)
+
+            val hits = mutableListOf<UniqueNaturalProduct>()
+
+            // do not fetch all at once since this would have insane memory requirements
+            var pageable: Pageable = PageRequest.of(0, 1000)
+            var slice: Slice<UniqueNaturalProduct>
+
+            while (true) {
+                slice = this.uniqueNaturalProductRepository.findAll(pageable)
+                val uniqueNaturalProducts: List<UniqueNaturalProduct> = slice.content
+
+                for (uniqueNaturalProduct in uniqueNaturalProducts) {
+                    val parsedSmiles: IAtomContainer = this.smilesParser.parseSmiles(uniqueNaturalProduct.getSmiles())
+                    val match = pattern.match(parsedSmiles);
+                    if (match.isNotEmpty()) {
+                        hits.add(uniqueNaturalProduct)
+                    }
+                }
+
+                if (!slice.hasNext()) {
+                    break
+                }
+
+                pageable = slice.nextPageable()
+
+            }
+
+            return hits
 
         } catch (e: InvalidSmilesException) {
             error("An InvalidSmilesException occured: ${e.message}")

@@ -3,7 +3,6 @@ import Row from "react-bootstrap/Row";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
 import Spinner from "./Spinner";
 import CardBrowser from "./browser/CardBrowser";
 import Error from "./Error";
@@ -20,14 +19,17 @@ export default class StructureSearch extends React.Component {
             ajaxError: null,
             ajaxIsLoaded: false,
             ajaxResult: [],
-            searchSubmitted: false
+            searchSubmitted: false,
+            exactMatch: true
         };
+
         this.handleDesireForCoffee = this.handleDesireForCoffee.bind(this);
         this.handleStructureSubmit = this.handleStructureSubmit.bind(this);
+        this.handleCheckboxExactMatch = this.handleCheckboxExactMatch.bind(this);
     }
 
     componentDidMount() {
-        this.editor = OpenChemLib.StructureEditor.createSVGEditor("structureSearchEditor", 1);
+        this.editor = OpenChemLib.StructureEditor.createSVGEditor("structureSearchEditor", 1.25);
     }
 
     handleDesireForCoffee() {
@@ -44,13 +46,24 @@ export default class StructureSearch extends React.Component {
             searchSubmitted: true
         });
 
-        this.doSearchBySmiles(structureAsSmiles);
+        if (this.state.exactMatch) {
+            this.doSearch("/api/search/structure?smiles=", encodeURIComponent(structureAsSmiles));
+        } else {
+            this.doSearch("/api/search/substructure?smiles=", encodeURIComponent(structureAsSmiles));
+        }
+
     }
 
-    doSearchBySmiles(smiles) {
+    handleCheckboxExactMatch(e) {
+        this.setState({
+            exactMatch: e.target.checked
+        });
+    }
+
+    doSearch(path, searchString) {
         restClient({
             method: "GET",
-            path: "/api/search/structure?smiles=" + encodeURIComponent(smiles)
+            path: path + encodeURIComponent(searchString)
         }).then(
             (response) => {
                 this.setState({
@@ -67,14 +80,18 @@ export default class StructureSearch extends React.Component {
     }
 
     render() {
-        const {ajaxError, ajaxIsLoaded, ajaxResult, searchSubmitted} = this.state;
+        const {ajaxError, ajaxIsLoaded, ajaxResult, searchSubmitted, exactMatch} = this.state;
         let resultRow;
 
         if (searchSubmitted) {
             if (ajaxError) {
                 resultRow = <Error/>;
             } else if (!ajaxIsLoaded) {
-                resultRow = <Row className="justify-content-center"><Spinner/></Row>;
+                resultRow =
+                    <Row className="justify-content-center">
+                        <Spinner/>
+                        {exactMatch && <p>Note: The substructure search is estimated to take 3-4 minutes.</p>}
+                    </Row>
             } else {
                 if (ajaxResult.length > 0) {
                     resultRow = <Row><CardBrowser naturalProducts={ajaxResult}/></Row>;
@@ -97,7 +114,11 @@ export default class StructureSearch extends React.Component {
                 <Row>
                     <Form>
                         <Form.Group>
-                            <Form.Check type="checkbox" label="Exact match (note: substructure search not implemented yet.)" checked disabled/>
+                            <Form.Check id="checkboxExactMatch"
+                                        type="checkbox"
+                                        label="Exact match"
+                                        onChange={this.handleCheckboxExactMatch}
+                                        checked={exactMatch}/>
                         </Form.Group>
                     </Form>
                 </Row>
