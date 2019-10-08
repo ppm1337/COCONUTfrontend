@@ -15,6 +15,7 @@ const restClient = require("../restClient");
 export default class StructureSearch extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             ajaxError: null,
             ajaxIsLoaded: false,
@@ -26,10 +27,18 @@ export default class StructureSearch extends React.Component {
         this.handleDesireForCoffee = this.handleDesireForCoffee.bind(this);
         this.handleStructureSubmit = this.handleStructureSubmit.bind(this);
         this.handleCheckboxExactMatch = this.handleCheckboxExactMatch.bind(this);
+
+        this.searchResultHeadline = React.createRef();
     }
 
     componentDidMount() {
         this.editor = OpenChemLib.StructureEditor.createSVGEditor("structureSearchEditor", 1.25);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.state.ajaxIsLoaded) {
+            this.scrollToRef(this.searchResultHeadline);
+        }
     }
 
     handleDesireForCoffee() {
@@ -77,6 +86,10 @@ export default class StructureSearch extends React.Component {
                     ajaxError: error
                 });
             });
+    }
+
+    scrollToRef(ref) {
+        window.scrollTo(0, ref.current.offsetTop);
     }
 
     render() {
@@ -140,7 +153,7 @@ export default class StructureSearch extends React.Component {
                     </Button>
                 </Row>
                 <br/>
-                {ajaxIsLoaded && <Row><h2>Search Results</h2></Row>}
+                {ajaxIsLoaded && <Row><h2 ref={this.searchResultHeadline}>Search Results</h2></Row>}
                 {resultRow}
             </Container>
         );
