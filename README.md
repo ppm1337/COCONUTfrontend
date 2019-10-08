@@ -2,7 +2,7 @@
 This is the frontend for the COlleCtion of Open Natural prodUcTs (COCONUT).
 Features:
 * browse database (cards and table browser with pagination)
-* search by SMILES, InChI, InChIKey, molecular formula
+* search by SMILES, InChI, InChIKey, molecular formula (two implementations for that)
 * structure and substructure search
 * individual page for each compound with molfile download and all information currently available in uniqueNaturalProduct collection
 * download database as SDF
@@ -21,7 +21,7 @@ and these for `sourceNaturalProduct`:
 * source
 
 # Known Issues
-* HeaderSearchBar: search event can be fired only once without reloading the page
+* HeaderSearchBar: search event can be fired only once without reloading the page, proposal: fix by HOC withHeaderSearchBar 
 * SubstructureSearch: poor performance although using Ullmann, see https://rguha.wordpress.com/2008/09/19/faster-substructure-search-in-the-cdk/
 * Tomcat configuration to allow illegal characters in URLs not working
 

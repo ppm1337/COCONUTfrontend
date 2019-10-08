@@ -11,6 +11,7 @@ const React = require("react");
 
 
 export default class HeaderSearchBar extends React.Component {
+    // TODO: proposal: make this HOC withHeaderSearchBar to avoid the redirect
     constructor(props) {
         super(props);
         this.state = {
