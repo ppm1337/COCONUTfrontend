@@ -1,7 +1,7 @@
 # COCONUT Database
 This is the frontend for the COlleCtion of Open Natural prodUcTs (COCONUT).
 Features:
-* browse database (cards and table browser)
+* browse database (cards and table browser with pagination)
 * search by SMILES, InChI, InChIKey, molecular formula
 * structure and substructure search
 * individual page for each compound with molfile download and all information currently available in uniqueNaturalProduct collection

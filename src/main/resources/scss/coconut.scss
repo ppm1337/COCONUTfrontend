@@ -88,6 +88,13 @@ h1, h2, h3, h4, h5, h6 {
   font-size: small;
 }
 
+table tr td, table tr th {
+  font-size: small;
+  border: none;
+  padding: 0.15rem;
+  margin-bottom: 0;
+}
+
 .card {
   box-shadow: $coconut-box-shadow;
 }
