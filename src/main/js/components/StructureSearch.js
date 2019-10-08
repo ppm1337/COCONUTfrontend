@@ -93,8 +93,16 @@ export default class StructureSearch extends React.Component {
                         {!exactMatch && <p>Note: The substructure search is estimated to take 3-4 minutes.</p>}
                     </Row>
             } else {
-                if (ajaxResult.length > 0) {
-                    resultRow = <Row><CardBrowser naturalProducts={ajaxResult}/></Row>;
+                if (ajaxResult.naturalProducts.length > 0) {
+                    resultRow =
+                        <>
+                            <Row>
+                                <p>Your search for "{ajaxResult.originalQuery}" yielded {ajaxResult.count} results. {ajaxResult.count > 250 && "Only 250 of these are shown."}</p>
+                            </Row>
+                            <Row>
+                                <CardBrowser naturalProducts={ajaxResult.naturalProducts}/>
+                            </Row>
+                        </>
                 } else {
                     resultRow = <Row><p>There are no results that exactly match your structure.</p></Row>;
                 }

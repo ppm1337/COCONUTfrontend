@@ -33,12 +33,12 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
     val smilesGenerator: SmilesGenerator = SmilesGenerator(SmiFlavor.Unique)
 
     @RequestMapping("/search/structure")
-    fun structureSearchBySmiles(@RequestParam("smiles") smiles: String): List<UniqueNaturalProduct> {
+    fun structureSearchBySmiles(@RequestParam("smiles") smiles: String): Map<String, Any> {
         return this.doStructureSearchBySmiles(URLDecoder.decode(smiles.trim(), "UTF-8"))
     }
 
     @RequestMapping("/search/substructure")
-    fun substructureSearch(@RequestParam("smiles") smiles: String): List<UniqueNaturalProduct> {
+    fun substructureSearch(@RequestParam("smiles") smiles: String): Map<String, Any> {
         return this.doSubstructureSearch(URLDecoder.decode(smiles.trim(), "UTF-8"))
     }
 
@@ -47,12 +47,18 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
         return this.doSimpleSearch(URLDecoder.decode(queryString.trim(), "UTF-8"))
     }
 
-    fun doStructureSearchBySmiles(smiles: String): List<UniqueNaturalProduct> {
+    fun doStructureSearchBySmiles(smiles: String): Map<String, Any> {
         try {
             val parsedSmiles: IAtomContainer = this.smilesParser.parseSmiles(smiles)
             val canonicalSmiles: String = this.smilesGenerator.create(parsedSmiles)
 
-            return this.uniqueNaturalProductRepository.findByCleanSmiles(canonicalSmiles)
+            val results = this.uniqueNaturalProductRepository.findByCleanSmiles(canonicalSmiles)
+
+            return mapOf(
+                    "originalQuery" to canonicalSmiles,
+                    "count" to results.size,
+                    "naturalProducts" to results
+            )
 
         } catch (e: InvalidSmilesException) {
             error("An InvalidSmilesException occured: ${e.message}")
@@ -61,12 +67,13 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
         }
     }
 
-    fun doSubstructureSearch(smiles: String): List<UniqueNaturalProduct> {
+    fun doSubstructureSearch(smiles: String): Map<String, Any> {
         try {
             val parsedSubstructureSmiles: IAtomContainer = this.smilesParser.parseSmiles(smiles)
             val pattern = Ullmann.findSubstructure(parsedSubstructureSmiles)
 
             val hits = mutableListOf<UniqueNaturalProduct>()
+            var hitsCount: Int = 0
 
             // do not fetch all at once since this would have insane memory requirements
             var pageable: Pageable = PageRequest.of(0, 1000)
@@ -79,8 +86,14 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
                 for (uniqueNaturalProduct in uniqueNaturalProducts) {
                     val parsedSmiles: IAtomContainer = this.smilesParser.parseSmiles(uniqueNaturalProduct.getSmiles())
                     val match = pattern.match(parsedSmiles);
+
+                    // do not save all hits since this would have insane memory requirements for simple and often reoccurring substructures
                     if (match.isNotEmpty()) {
-                        hits.add(uniqueNaturalProduct)
+                        hitsCount++
+
+                        if (hitsCount < 250) {
+                            hits.add(uniqueNaturalProduct)
+                        }
                     }
                 }
 
@@ -89,10 +102,13 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
                 }
 
                 pageable = slice.nextPageable()
-
             }
 
-            return hits
+            return mapOf(
+                    "originalQuery" to smiles,
+                    "count" to hitsCount,
+                    "naturalProducts" to hits
+            )
 
         } catch (e: InvalidSmilesException) {
             error("An InvalidSmilesException occured: ${e.message}")
