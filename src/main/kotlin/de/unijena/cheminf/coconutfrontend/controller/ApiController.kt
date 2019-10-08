@@ -44,7 +44,11 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
 
     @RequestMapping("/search/simple")
     fun simpleSearch(@RequestParam("query") queryString: String): Map<String, Any> {
-        return this.doSimpleSearch(URLDecoder.decode(queryString.trim(), "UTF-8"))
+        /* switch between simple and simple heuristic search
+        * the latter tries to guess the input type that could become harder with more search options
+        */
+        return this.doSimpleSearchWithHeuristic(URLDecoder.decode(queryString.trim(), "UTF-8"))
+        // return this.doSimpleSearch(URLDecoder.decode(queryString.trim(), "UTF-8"))
     }
 
     fun doStructureSearchBySmiles(smiles: String): Map<String, Any> {
@@ -117,7 +121,23 @@ class ApiController(val uniqueNaturalProductRepository: UniqueNaturalProductRepo
         }
     }
 
+
     fun doSimpleSearch(query: String): Map<String, Any> {
+        val naturalProducts = mutableSetOf<UniqueNaturalProduct>()
+
+        naturalProducts += this.uniqueNaturalProductRepository.findBySmiles(query)
+        naturalProducts += this.uniqueNaturalProductRepository.findByCleanSmiles(query)
+        naturalProducts += this.uniqueNaturalProductRepository.findByInchi(query)
+        naturalProducts += this.uniqueNaturalProductRepository.findByInchikey(query)
+        naturalProducts += this.uniqueNaturalProductRepository.findByMolecularFormula(query)
+
+        return mapOf(
+                "originalQuery" to query,
+                "naturalProducts" to naturalProducts
+        )
+    }
+
+    fun doSimpleSearchWithHeuristic(query: String): Map<String, Any> {
         // determine type of input on very basic principles without validation
         val regexMap: Map<String, Regex> = mapOf(
                 "inchi" to Regex("^InChI=.*$"),
